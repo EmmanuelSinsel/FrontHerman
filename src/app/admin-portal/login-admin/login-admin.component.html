@@ -1,56 +1,73 @@
-<div class="background-body container" *ngIf="showLogin">
-    <div class="auth-form">
-        <br><br>
-        <p class="auth-label">Iniciar Sesion</p>
-        <br>
-        <div class="input-container">
-            <input matInput [(ngModel)]="data.email" placeholder="Email" class="auth-input">
+<div class="back" *ngIf="showLogin">
+    <div class="background-body"></div>
+    <div class="container">
+        <div class="auth-form">
+            <br><br>
+            <p class="auth-label">Iniciar Sesión</p>
+            <br>
+            <div class="input-container">
+                <input matInput [(ngModel)]="data.email" placeholder="Email" class="auth-input">
+            </div>
+            <br>
+            <div class="input-container">
+                <input matInput type="password" [(ngModel)]="data.password" placeholder="Contraseña" class="auth-input">
+            </div>
+            <div class="left-text" (click)="pr_init()">
+                <p class="help-text url_text">Olvidaste tu contraseña?</p>
+            </div>
+            <button class="login-btn" (click)="login()">Iniciar Sesión</button>
+            <br>
+            <div class="left-text" *ngIf="showLoginError" >
+                <p class="help-text">{{loginError}}</p>
+            </div>
+            <br>
+            
         </div>
-        <br>
-        <div class="input-container">
-            <input matInput type="password" [(ngModel)]="data.password" placeholder="Contraseña" class="auth-input">
-        </div>
-        <div class="left-text" (click)="pr_init()">
-            <p class="help-text url_text">Olvidaste tu contraseña?</p>
-        </div>
-        <button class="login-btn" (click)="login()">Iniciar Sesion</button>
-        <br><br>
+
     </div>
 </div>
-<div class="background-body container" *ngIf="showPR1">
-    <div class="auth-form">
-        <br><br>
-        <p class="auth-label">Recuperar Contraseña</p>
-        <br>
-        <div class="left-text">
-            <p class="help-text">Introduce tu Correo o Telefono u Usuario</p>
+<div class="back" *ngIf="showPR1">
+    <div class="background-body"></div>
+    <div class="container">
+        <div class="auth-form">
+            <br><br>
+            <p class="auth-label">Recuperar Contraseña</p>
+            <br>
+            <div class="left-text">
+                <p class="help-text">Introduce tu Correo o Telefono u Usuario</p>
+            </div>
+            <div class="input-container">
+                <input matInput type="email" [(ngModel)]="password_recover.email" placeholder="Escribe aqui..." class="auth-input">
+            </div>
+            <br><br>
+            <button class="login-btn" (click)="pr()">Continuar</button>
+            <br><br>
         </div>
-        <div class="input-container">
-            <input matInput type="email" [(ngModel)]="password_recover.email" placeholder="Escribe aqui..." class="auth-input">
-        </div>
-        <br><br>
-        <button class="login-btn" (click)="pr()">Continuar</button>
-        <br><br>
     </div>
 </div>
-<div class="background-body container" *ngIf="showPR2">
-    <div class="auth-form">
-        <br><br>
-        <p class="auth-label">Recuperar Contraseña</p>
-        <br>
-        <div class="left-text">
-            <p class="help-text">Hemos enviando un codigo de recuperacion al correo:</p>
-            <p>{{pr_email}}</p>
+<div class="back" *ngIf="showPR2">
+    <div class="background-body"></div>
+    <div class="container">
+        <div class="auth-form">
+            <br><br>
+            <p class="auth-label">Recuperar Contraseña</p>
+            <br>
+            <div class="left-text">
+                <p class="help-text">Hemos enviando un codigo de recuperacion al correo:</p>
+                <p>{{pr_email}}</p>
+            </div>
+            <div class="input-container">
+                <input matInput [(ngModel)]="recover_data.token" placeholder="Codigo de Recuperacion" class="auth-input">
+            </div>
+            <br><br>
+            <button class="login-btn" (click)="pr_verify()">Continuar</button>
+            <br><br>
         </div>
-        <div class="input-container">
-            <input matInput [(ngModel)]="recover_data.token" placeholder="Codigo de Recuperacion" class="auth-input">
-        </div>
-        <br><br>
-        <button class="login-btn" (click)="pr_verify()">Continuar</button>
-        <br><br>
     </div>
 </div>
-<div class="background-body container" *ngIf="showPR3">
+<div class="back" *ngIf="showPR3">
+    <div class="background-body"></div>
+    <div class="container">
     <div class="auth-form">
         <br><br>
         <p class="auth-label">Nueva Contraseña</p>
@@ -59,15 +76,16 @@
             <p class="help-text">Introduce tu nueva Contraseña:</p>
         </div>
         <div class="input-container">
-            <input matInput [(ngModel)]="rpassword.password" placeholder="Contraseña" class="auth-input">
+            <input matInput type="password" [(ngModel)]="rpassword.password" placeholder="Contraseña" class="auth-input">
         </div>
+        <br>
         <div class="input-container">
-            <input matInput [(ngModel)]="rpassword.confirm_password" placeholder="Confirmar Contraseña" class="auth-input">
+            <input matInput type="password" [(ngModel)]="rpassword.confirm_password" placeholder="Confirmar Contraseña" class="auth-input">
         </div>
         <br><br>
         <button class="login-btn" (click)="pr_reset()">Continuar</button>
         <br><br>
-    </div>
+    </div></div>
 </div>
 
 

@@ -1,10 +1,21 @@
 .background-body{
-    background-color: #344f92;
-    width: 100%;
+    position: absolute;
+    background-image: url("src\assets\images\background.jpg");
+    background-position: center;
+    background-size:100%;
+    background-repeat: no-repeat;
     height: 100%;
-}
+    width: 100%;
+    filter: blur(8px);
+    z-index: -1;
 
+}
+.back{
+    height: 100%;
+    width: 100%;
+}
 .container{
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +29,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 5px 5px 15px 3px #1f2f57;
+    box-shadow: 5px 5px 15px 3px #000000;
     outline-width: 0px;
 }
 .auth-input{
@@ -35,7 +46,7 @@
     width: 75%;
     border: 0px;
     border-radius: 5px;
-    box-shadow: 5px 5px 10px 1px #1f2f57;
+    box-shadow: 5px 5px 10px 1px #000000;
     outline-width: 0px;
 }
 .help-text{
@@ -59,13 +70,13 @@
 .login-btn{
     width: 75%;
     height: 50px;
-    background-color: black;
+    background-color: rgb(19, 106, 133);
     font-size: 20px;
     font-family: 'Palatino';
     border-radius: 5px;
+    border: 0px;
     color: white;
-    box-shadow: 5px 5px 10px 1px #1f2f57;
+    box-shadow: 5px 5px 10px 1px #000000;
     outline-width: 0px;
 }
-
 

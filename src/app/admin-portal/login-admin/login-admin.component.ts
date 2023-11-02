@@ -12,18 +12,23 @@ import { Router } from '@angular/router';
   providers: [HttpClient]
 })
 export class LoginAdminComponent {
+  //DATA SENDERS
   data: login = new login()
   password_recover: password_recover = new password_recover()
   recover_data: recover_data = new recover_data()
   rpassword: reset_password = new reset_password()
+  //FLAGS
   showLogin: boolean = true
   showPR1: boolean = false
   showPR2: boolean = false
   showPR3: boolean = false
+  showLoginError: boolean = false
+  loginError: string = ""
+  showTokenError: boolean = false
+  showPasswordResetError: boolean = false
   pr_email: string = ""
   constructor(private Auth: AuthService,
               private router: Router){}
-
   ngOnInit() {
     const token: string | null = localStorage.getItem('token');
     console.log(token)
@@ -51,6 +56,14 @@ export class LoginAdminComponent {
         if(res['status']=="1"){
           localStorage.setItem('token',res['token'])
           this.router.navigate(['admin']);
+        }
+        if(res['status']=="0"){
+          this.showLoginError = true
+          this.loginError = "Contraseña incorrecta"
+        }
+        if(res['status']=="2"){
+          this.showLoginError = true
+          this.loginError = "Usuario inexistente"
         }
       },
       (error) => {
