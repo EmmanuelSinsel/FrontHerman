@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppModule } from 'src/app/app.module';
 import { HttpClient, HttpHeaders, HttpParams, HttpHandler } from  '@angular/common/http';
-import { login, password_recover, recover_data, reset_password } from 'src/models/models';
+import { login, password_recover, recover_data, reset_password, token_data } from 'src/models/models';
 
 
 @Injectable({
@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   login(data: login){
-    console.log(data)
     var headers = this.getCustomHeaders();
     const params = {
         type : data.type,
@@ -35,8 +34,12 @@ export class AuthService {
   logout(){
 
   }
-  verify_token(){
-
+  verify_token(data: token_data){
+    var headers = this.getCustomHeaders();
+    const params = {
+        token : data.token
+      };
+    return this.http.post(this.url+"/authenticate", params, {headers});
   }
   send_verification_email(){
 
@@ -45,7 +48,6 @@ export class AuthService {
 
   }
   send_password_reset(data: password_recover){
-    console.log(data)
     var headers = this.getCustomHeaders();
     const params = {
         email : data.email,
@@ -54,7 +56,6 @@ export class AuthService {
     return this.http.post(this.url+"/password_recover", params, {headers});
   }
   verify_password_reset(data: recover_data){
-    console.log(data)
     var headers = this.getCustomHeaders();
     const params = {
         token : data.token,
@@ -62,7 +63,6 @@ export class AuthService {
     return this.http.post(this.url+"/password_token_verify", params, {headers});
   }
   reset_password(data: reset_password){
-    console.log(data)
     var headers = this.getCustomHeaders();
     const params = {
         password : data.password,

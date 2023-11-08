@@ -1,5 +1,5 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { EventManager } from '@angular/platform-browser';
 import { login, password_recover, recover_data, reset_password } from 'src/models/models';
 import { AuthService } from 'src/services/auth.service'
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   providers: [HttpClient]
 })
 export class LoginAdminComponent {
+  //ELEMENTS
+  @ViewChild('cont') elementView: ElementRef | undefined;
   //DATA SENDERS
   data: login = new login()
   password_recover: password_recover = new password_recover()
@@ -25,15 +27,21 @@ export class LoginAdminComponent {
   showLoginError: boolean = false
   loginError: string = ""
   showTokenError: boolean = false
+  tokenError: string = ""
   showPasswordResetError: boolean = false
+  prError: string = ""
   pr_email: string = ""
   constructor(private Auth: AuthService,
               private router: Router){}
   ngOnInit() {
-    const token: string | null = localStorage.getItem('token');
+    if(this.elementView != null){
+      console.log(this.elementView.nativeElement.offsetHeight)
+    }
+
+    const token: string | null = localStorage.getItem('token_admin');
     console.log(token)
     if(token != null){
-      localStorage.setItem('token',token)
+      localStorage.setItem('token_admin',token)
       let auto_login: login = {email:"", password:"",token: token, type:"1"}
       this.Auth.login(auto_login).subscribe(
         (res: any) => {
@@ -54,7 +62,7 @@ export class LoginAdminComponent {
       (res: any) => {
         console.log(res)
         if(res['status']=="1"){
-          localStorage.setItem('token',res['token'])
+          localStorage.setItem('token_admin',res['token'])
           this.router.navigate(['admin']);
         }
         if(res['status']=="0"){
@@ -72,7 +80,6 @@ export class LoginAdminComponent {
     );
   }
   pr_init(){
-    console.log("asda")
     this.showLogin = false
     this.showPR1 = true
   }
@@ -99,6 +106,15 @@ export class LoginAdminComponent {
         if(res['status']=="1"){
           this.showPR2 = false
           this.showPR3 = true
+          this.showTokenError = false
+        }
+        if(res['status']=="0"){
+          this.showTokenError = true
+          this.tokenError = "Token Invalido"
+        }
+        if(res['status']=="2"){
+          this.showTokenError = true
+          this.tokenError = "Token Expirado"
         }
       },
       (error) => {
@@ -115,6 +131,7 @@ export class LoginAdminComponent {
           if(res['status']=="1"){
             this.showPR3 = false
             this.showLogin = true
+            this.showPasswordResetError = false
           }
         },
         (error) => {
@@ -122,6 +139,14 @@ export class LoginAdminComponent {
         }
       );
     }
-
+    else{
+      this.showPasswordResetError = true
+      this.prError = "Las contraseñas no coinciden"
+    }
+  }
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) { 
+    console.log(event.target.innerHeight)
   }
 }

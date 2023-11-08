@@ -17,3 +17,6 @@ export class reset_password{
     password: string = ""
     confirm_password: string = ""
 }
+export class token_data{
+    token: string = ""
+}
