@@ -3,11 +3,14 @@
     height: 7%;
     background-color: #344f92;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    align-content: space-between;
     justify-content: center;
 }
 .searchbar{
+    width: 100%;
     border: 0px;
     height: 30px;
     margin: 5px 5px 5px 5px;
@@ -16,6 +19,7 @@
     outline-width: 0px;
 }
 .searchbar-container{
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,19 +28,112 @@
     background-color: white;
     border: 0px;
     border-radius: 5px;
-    box-shadow: 5px 5px 10px 1px #000000;
+    box-shadow: 5px 5px 5px 1px #000000;
     outline-width: 0px;
+}
+.centerbar{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .search{
     margin-right: 5px;
     width: 30px;
+    height: 30px;
     justify-content: center;
     align-items: center;
     text-align: center;
     background-image: url("src/assets/images/Search-icon.png");
     background-position: center;
     background-size: 70%;
-    height: 100%;
     background-repeat: no-repeat;
     cursor:pointer;
+}
+.leftbar{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    direction: ltr;
+}
+.title{
+    font-size: 30px;
+    color: white;
+    text-align: justify;
+    margin-top: 12px;
+    margin-left: 30px
+}
+.rightbar{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+.user-icon{
+    background-image: url("src/assets/images/user-icon2.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert();
+    width: 60px;
+    height: 60px;
+}
+.user-icon:hover{
+    filter:brightness(0);
+}
+
+.playground{
+    height: 93%;
+    display: flex;
+    flex-direction: row;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 100%;
+}
+.big-button{
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 100%;
+    fill: black;
+    background-color: aliceblue;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: black;
+    margin: 10px 10px 10px 10px;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+}
+.row-container{
+    height: 100%;
+    width: fit-content;
+}
+.divider{
+    margin: 10px 10px 25px 10px;
+    font-size: 30px;
+    font-family: Palatino;
+}
+.linea {
+    margin:0px 20px;
+    width:90px;    
+    border-top:1px solid #999;
+    position: relative;
+    top:10px;
+    float:left;
 }
