@@ -14,12 +14,29 @@
     border-radius: 10px;
     cursor:pointer;
 }
+.side-button-selected{
+    width: 100%;
+    background-color:#213977;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    cursor:pointer;
+}
 .side-button-label{
     margin-left: 10px;
     margin-top: 10px;
     font-size: 18px;
     font-weight:500;
     color: black;
+}
+.side-button-label-selected{
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight:500;
+    color: white;
 }
 .side-button-sublabel{
     margin-left: 30px;

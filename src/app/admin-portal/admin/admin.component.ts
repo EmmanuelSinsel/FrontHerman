@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd  } from '@angular/router';
 import { token_data } from 'src/models/models';
 import { AuthService } from 'src/services/auth.service' 
-
+import { SidebarComponent } from 'src/app/sidebar/sidebar.component'
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -11,9 +12,17 @@ import { AuthService } from 'src/services/auth.service'
 
 export class AdminComponent {
   showFiller = false;
+
   constructor(private Auth: AuthService,
-              private router: Router){}
+              private router: Router,
+              private Sidebar: SidebarComponent,
+              private location: Location){
+              }
+  href: string = ""
+  index: Number = 0;
   ngOnInit() {
+
+    this.location.go('admin');
     const token: string | null = localStorage.getItem('token_admin');
     console.log(token)
     if(token != null){
@@ -35,57 +44,45 @@ export class AdminComponent {
       this.router.navigate(['admin/login']);
     }
   }
-
-  route(index: number){
-    switch(index){
-      case 1: {
-        this.router.navigate(['loans']);
-        break;
-      }
-      case 2: {
-        this.router.navigate(['returns']);
-        break;
-      }
-      case 3: {
-        this.router.navigate(['reserves']);
-        break;
-      }
-      case 4: {
-        this.router.navigate(['books']);
-        break;
-      }
-      case 5: {
-        this.router.navigate(['authors']);
-        break;
-      }
-      case 6: {
-        this.router.navigate(['generes']);
-        break;
-      }
-      case 7: {
-        this.router.navigate(['']);
-        break;
-      }
-      case 8: {
-        this.router.navigate(['']);
-        break;
-      }
-      case 9: {
-        this.router.navigate(['']);
-        break;
-      }
-      case 10: {
-        this.router.navigate(['']);
-        break;
-      }
-      case 11: {
-        this.router.navigate(['']);
-        break;
-      }
-      case 12: {
-        this.router.navigate(['']);
-        break;
-      }
+  index_change(){
+    let path = this.location.path();
+    console.log(path)
+    if (path == "/admin/loans") {
+      this.index = 1
+    }
+    if (path == "/admin/returns") {
+      this.index = 2
+    }
+    if (path == "/admin/reserves") {
+      this.index = 3
+    }
+    if (path == "/admin/books") {
+      this.index = 4
+    }
+    if (path == "/admin/authors") {
+      this.index = 5
+    }
+    if (path == "/admin/generes") {
+      this.index = 6
+    }
+    if (path == "admin/loans") {
+      this.index = 7
+    }
+    if (path == "admin/loans") {
+      this.index = 8
+    }
+    if (path == "admin/loans") {
+      this.index = 9
+    }
+    if (path == "admin/loans") {
+      this.index = 10
+    }
+    if (path == "admin/loans") {
+      this.index = 11
+    }
+    if (path == "admin/loans") {
+      this.index = 12
     }
   }
+  
 }

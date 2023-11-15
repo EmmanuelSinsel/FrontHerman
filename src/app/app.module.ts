@@ -14,12 +14,12 @@ import { AlumnComponent } from './alumn-portal/alumn/alumn.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { TopbarComponent } from './topbar/topbar.component';
-import { AuthorsComponent } from './admin-portal/admin/authors/authors.component';
-import { BooksComponent } from './admin-portal/admin/books/books.component';
-import { GeneresComponent } from './admin-portal/admin/generes/generes.component';
-import { LoansComponent } from './admin-portal/admin/loans/loans.component';
-import { ReservesComponent } from './admin-portal/admin/reserves/reserves.component';
-import { ReturnsComponent } from './admin-portal/admin/returns/returns.component';
+import { AuthorsComponent } from './admin-portal/authors/authors.component';
+import { BooksComponent } from './admin-portal/books/books.component';
+import { GeneresComponent } from './admin-portal/generes/generes.component';
+import { LoansComponent } from './admin-portal/loans/loans.component';
+import { ReservesComponent } from './admin-portal/reserves/reserves.component';
+import { ReturnsComponent } from './admin-portal/returns/returns.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({

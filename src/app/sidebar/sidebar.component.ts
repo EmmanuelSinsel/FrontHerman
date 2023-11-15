@@ -1,39 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import {Location} from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
+@Injectable({ providedIn: 'root' })
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
+
 export class SidebarComponent {
-
-  constructor(private router: Router){}
-
+  constructor(private router: Router,
+              private location: Location){}
+  public index: Number = 0;
+  button_focus = "side-button-selected"
+  button_not_focus = "side-button"
+  label_focus = "side-button-label-selected"
+  label_not_focus = "side-button-label"
   route(index: number){
+    console.log(index)
+    this.index = index
     switch(index){
       case 1: {
-        this.router.navigate(['loans']);
+        this.location.go("admin/loans");
         break;
       }
       case 2: {
-        this.router.navigate(['returns']);
+        this.location.go('admin/returns');
         break;
       }
       case 3: {
-        this.router.navigate(['reserves']);
+        this.location.go('admin/reserves');
         break;
       }
       case 4: {
-        this.router.navigate(['books']);
+        this.location.go('admin/books');
         break;
       }
       case 5: {
-        this.router.navigate(['authors']);
+        this.location.go('admin/authors');
         break;
       }
       case 6: {
-        this.router.navigate(['generes']);
+        this.location.go('admin/generes');
         break;
       }
       case 7: {
