@@ -21,8 +21,8 @@ export class AdminComponent {
   href: string = ""
   index: Number = 0;
   ngOnInit() {
-
-    this.location.go('admin');
+    this.index_change()
+    //this.location.go('admin');
     const token: string | null = localStorage.getItem('token_admin');
     console.log(token)
     if(token != null){

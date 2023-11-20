@@ -1,0 +1,143 @@
+.background-body{
+    position: absolute;
+    background: #344f92;
+    background-position: center;
+    background-size:100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+
+}
+.back{
+    height: 100%;
+    width: 100%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    transition: height 1s ease;
+    overflow-y: auto;
+}
+
+.auth-form{
+    width: 350px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px 3px #000000;
+    transition: height 1s;
+    outline-width: 0px;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.crud-input{
+    border: 0px;
+    height: 30px;
+    width: 94%;
+    margin: 5px 5px 5px 5px;
+    font-size: 20px;
+    font-family: 'Palatino';
+    outline-width: 0px;
+}
+.input-container{
+    fill: black;
+    width: 100%;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px 1px #000000;
+    outline-width: 0px;
+}
+.help-text{
+    width: 100%;
+    font-size: 14px;
+    font-style: italic;
+}
+.url_text:hover{
+    color: #344f92;
+    cursor:pointer;
+}
+.left-text{
+    width: 75%;
+    margin: 10px 10px 10px 10px;
+}
+.error-text{
+    color: red;
+}
+.center-text{
+    width: 50%;
+    justify-content: center;
+    text-align: center;
+}
+label{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-family: 'Palatino';
+}
+.btn{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    width: 75%;
+    height: 50px;
+    max-width: 500px;
+    background-color: black;
+    font-size: 20px;
+    font-family: 'Palatino';
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    box-shadow: 5px 5px 10px 1px #000000;
+    outline-width: 0px;
+    cursor:pointer;
+}
+.btn:hover{
+    background-color:#3C4F45;
+}
+
+.logo{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-family: Palatino;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: baseline;
+    height: 100%;
+    width: 50%;
+}
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+.row{
+    color:#000000
+}
+.row:hover{
+    background-color: #344f92;
+    color: white;
+    cursor:pointer;
+}
+table {border: none;}
+.btn-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}

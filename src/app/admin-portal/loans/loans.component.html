@@ -1,1 +1,94 @@
-<p>loans works!</p>
+<div class="container">
+    <br><br>
+    <div *ngIf="view">
+        <table class="item-table">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    CUENTA
+                </th>
+                <th>
+                    ISBN
+                </th>
+                <th>
+                    LIBRO
+                </th>
+                <th>
+                    FECHA DE PRESTAMO
+                </th>
+                <th>
+                    FECHA LIMITE
+                </th>
+                <th>
+                    FECHA DE REGRESO
+                </th>
+            </tr>
+            <tr *ngFor="let item of loans;let indice=index" (click)="edit(item.id_transaction, indice)" class="row">
+                <td>
+                    {{item.id_transaction}}
+                </td>
+                <td>
+                    {{item.account}}
+                </td>
+                <td>
+                    {{item.isbn}}
+                </td>
+                <td>
+                    {{item.book}}
+                </td>
+                <td>
+                    {{item.date_transaction}}
+                </td>
+                <td>
+                    {{item.date_deadline}}
+                </td>
+                <td>
+                    {{item.date_return}}
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div class="btn-container">
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO PRESTAMO</button>
+        </div>
+    </div>
+    <div class="form" *ngIf="register">
+        <br><br>
+        <label>Alumno</label>
+        <div class="input-container">
+            <input class="crud-input" placeholder="Numero de cuenta" [(ngModel)]="account_number">
+        </div>
+        <br>
+        <label>Libro</label>
+        <div class="input-container">
+            <input class="crud-input" placeholder="ISBN o Titulo" [(ngModel)]="book">
+        </div>
+        <br>
+        <label>Fecha de Prestamo</label>
+        <div class="input-container">
+            <input type="date" class="crud-input" [(ngModel)]="date_loan">
+        </div>
+        <br>
+        <label>Fecha de Limite de Devolucion</label>
+        <div class="input-container">
+            <input type="date" class="crud-input" [(ngModel)]="date_deadline">
+        </div>
+        <br>
+        <label>Comentario</label>
+        <div class="input-container">
+            <input class="crud-input" placeholder="Comentarios sobre el Alumno o el Libro" [(ngModel)]="notation">
+        </div>
+        <br><br>
+        <div class="btn-container">
+            <div style="display: flex; flex-direction: row;">
+                <button class="btn" *ngIf="!modify" (click)="register_loan()" style="background-color: #3C4F45;">REGISTRAR PRESTAMO</button>
+                <button class="btn" *ngIf="modify" (click)="update_loan()" style="background-color:chocolate;">MODIFICAR PRESTAMO</button>
+                <button class="btn" *ngIf="modify" (click)="return_loan()" style="background-color: #344f92;">LIBRO DEVUELTO</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

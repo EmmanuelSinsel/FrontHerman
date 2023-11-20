@@ -1,12 +1,13 @@
 <app-topbar></app-topbar>
 <div class="playground">
-    <app-sidebar (click)="index_change()"></app-sidebar>
+    <app-sidebar (click)="index_change()" class="sidebar"></app-sidebar>
+    <br><br>
     <div class="main-container">
         <app-loans *ngIf="index==1"></app-loans>
-        <app-returns *ngIf="index==2"></app-returns>
         <app-reserves *ngIf="index==3"></app-reserves>
         <app-books *ngIf="index==4"></app-books>
         <app-authors *ngIf="index==5"></app-authors>
         <app-generes *ngIf="index==6"></app-generes>
     </div>
+    <div class="sidebar"></div>
 </div>

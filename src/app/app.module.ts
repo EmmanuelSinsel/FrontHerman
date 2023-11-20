@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { LoginAdminComponent } from './admin-portal/login-admin/login-admin.component';
 import { LoginAlumnComponent } from './alumn-portal/login-alumn/login-alumn.component';
 import { AdminComponent } from './admin-portal/admin/admin.component';
@@ -21,6 +21,7 @@ import { LoansComponent } from './admin-portal/loans/loans.component';
 import { ReservesComponent } from './admin-portal/reserves/reserves.component';
 import { ReturnsComponent } from './admin-portal/returns/returns.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AuthInterceptorService } from 'src/services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -49,12 +50,17 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatSidenavModule, 
     MatButtonModule]
   ,
-  providers: [HttpClient],
+  providers: [    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  url: string = "http://localhost:8000/api"
+  url: string = "http://192.168.1.69:8000/api"
 
   constructor(){
+    
   }
 }
