@@ -19,7 +19,6 @@ import { BooksComponent } from './admin-portal/books/books.component';
 import { GeneresComponent } from './admin-portal/generes/generes.component';
 import { LoansComponent } from './admin-portal/loans/loans.component';
 import { ReservesComponent } from './admin-portal/reserves/reserves.component';
-import { ReturnsComponent } from './admin-portal/returns/returns.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AuthInterceptorService } from 'src/services/auth-interceptor.service';
 
@@ -36,7 +35,6 @@ import { AuthInterceptorService } from 'src/services/auth-interceptor.service';
     GeneresComponent,
     LoansComponent,
     ReservesComponent,
-    ReturnsComponent,
     SidebarComponent,
   ],
   imports: [
@@ -58,7 +56,7 @@ import { AuthInterceptorService } from 'src/services/auth-interceptor.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  url: string = "http://192.168.1.69:8000/api"
+  url: string = "http://localhost:8000/api"
 
   constructor(){
     

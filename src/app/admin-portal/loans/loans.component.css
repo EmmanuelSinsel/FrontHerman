@@ -53,7 +53,7 @@
     width: 100%;
     border: 0px;
     border-radius: 5px;
-    box-shadow: 5px 5px 10px 1px #000000;
+    border: 1px #344f92 solid;
     outline-width: 0px;
 }
 .help-text{
@@ -94,12 +94,12 @@ label{
     border-radius: 5px;
     border: 0px;
     color: white;
-    box-shadow: 5px 5px 10px 1px #000000;
     outline-width: 0px;
     cursor:pointer;
 }
 .btn:hover{
     background-color:#3C4F45;
+    border: 2px black solid;
 }
 
 .logo{
@@ -114,7 +114,7 @@ label{
     flex-direction: column;
     justify-content: left;
     align-items: baseline;
-    height: 100%;
+    height: fit-content;
     width: 50%;
 }
 th, td {
@@ -140,4 +140,51 @@ table {border: none;}
     align-items: center;
     align-self: center;
     align-content: center;
+}
+.vl {
+    background-color: #000000;
+    width: 5px;
+    height: 50px;
+}
+.searchbar{
+    width: 100%;
+    border: 0px;
+    height: 30px;
+    margin: 5px 5px 5px 5px;
+    font-size: 20px;
+    font-family: 'Palatino';
+    outline-width: 0px;
+}
+.searchbar-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    fill: black;
+    background-color: white;
+    border: 0px;
+    border-radius: 5px;
+    border: 1px black solid;
+    outline-width: 0px;
+}
+.centerbar{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.search{
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url("src/assets/images/Search-icon.png");
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    cursor:pointer;
 }

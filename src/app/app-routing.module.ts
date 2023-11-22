@@ -9,7 +9,6 @@ import { BooksComponent } from './admin-portal/books/books.component';
 import { GeneresComponent } from './admin-portal/generes/generes.component';
 import { LoansComponent } from './admin-portal/loans/loans.component';
 import { ReservesComponent } from './admin-portal/reserves/reserves.component';
-import { ReturnsComponent } from './admin-portal/returns/returns.component';
 
 
 const routes: Routes = [{ path: 'admin/login',    component: LoginAdminComponent },

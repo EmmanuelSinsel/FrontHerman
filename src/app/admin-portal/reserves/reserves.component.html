@@ -1,1 +1,133 @@
-<p>reserves works!</p>
+<div class="container">
+    <br><br>
+    <div *ngIf="view">
+        <div class="centerbar">
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Numero de Cuenta" [(ngModel)]="filter_search">
+                <div class="search" (click)="get_data(filter_search)"></div>
+            </div>
+        </div><br>
+        <table class="item-table">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    CUENTA
+                </th>
+                <th>
+                    ISBN
+                </th>
+                <th>
+                    LIBRO
+                </th>
+                <th>
+                    FECHA DE ENTREGA
+                </th>
+                <th>
+                    ESTADO
+                </th>
+            </tr>
+            <tr *ngFor="let item of reserves;let indice=index" (click)="edit(item.id_reserve, indice)" class="row">
+                <td>
+                    {{item.id_reserve}}
+                </td>
+                <td>
+                    {{item.account}}
+                </td>
+                <td>
+                    {{item.isbn}}
+                </td>
+                <td>
+                    {{item.book}}
+                </td>
+                <td>
+                    {{item.date_deliver}}
+                </td>
+                <td>
+                    {{item.delivered}}
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div class="btn-container">
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO PRESTAMO</button>
+        </div>
+    </div>
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div *ngIf="register" class="form" style="flex-direction: row; width: 100%;">
+            <div style="margin-left: 10px; width: 40%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos del Prestamo</label><br><br>
+                <label>Alumno</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Numero de cuenta" [(ngModel)]="account_number" (input)="get_alumn_data()">
+                </div>
+                <br>
+                <label>Libro</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="ISBN o Titulo" [(ngModel)]="book" (input)="get_book_data()">
+                </div>
+                <br>
+                <label>Fecha de Prestamo</label>
+                <div class="input-container">
+                    <input type="date" class="crud-input" (change)="change_deadline()" [(ngModel)]="date_loan">
+                </div>
+                <br>
+                <label>Fecha de Limite de Devolucion</label>
+                <div class="input-container">
+                    <input type="date" class="crud-input" disabled="true" [(ngModel)]="date_deadline">
+                </div>
+                <br>
+                <label>Comentario</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Comentarios sobre el Alumno o el Libro" [(ngModel)]="notation">
+                </div>
+                <br><br>
+            </div>
+            <div style="margin-left: 50px; width: 40%;">
+                <br><br>
+                <label style="font-weight: bold;">Resumen</label>
+                <br><br>
+                <label>Informacion del Alumno</label>
+                <br><br>
+                <label>Alumno</label>
+                <p>{{name}}</p>
+                <label>Numero de Cuenta</label>
+                <p>{{account}}</p>
+                <label>Grupo</label>
+                <p>{{group}}</p>
+                <label>Carrera</label>
+                <p>{{carreer}}</p>
+                <label>Telefono</label>
+                <p>{{phone}}</p>
+                <label>Correo</label>
+                <p>{{email}}</p>
+            </div>
+            <div style="margin-left: 50px; width: 40%;">
+                <br><br>
+                <label style="color: white;">.</label>
+                <br><br>
+                <label>Informacion del Libro</label>
+                <br><br>
+                <label>Titulo</label>
+                <p>{{title}}</p>
+                <label>ISBN</label>
+                <p>{{isbn}}</p>
+                <label>Categoria</label>
+                <p>{{category}}</p>
+                <label>Autor</label>
+                <p>{{author}}</p>
+                <label>Status</label>
+                <p>{{state}}</p>
+            </div>
+        </div>
+        <div class="btn-container" *ngIf="register">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" *ngIf="modify" (click)="deliver_reserve()" style="background-color: #344f92;">ENTREGAR LIBRO</button>
+                <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
