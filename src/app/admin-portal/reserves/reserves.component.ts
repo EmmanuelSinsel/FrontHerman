@@ -25,14 +25,11 @@ export class ReservesComponent {
   register: boolean = false
   modify: boolean = false
   filter_search: string = ""
-  actual_loan: string = ""
+  actual_reserve: string = ""
   //REGISTER
   account_number: string = ""
   book: string = ""
-  date_loan: string = ""
-  date_deadline: string = ""
-  notation: string = ""
-  date: string | null = ""
+  date_deliver: string = ""
   //RESUME
   //-ALUMN
   name: string = "-"
@@ -50,21 +47,18 @@ export class ReservesComponent {
   state: string = "-"
   constructor(private crud: CrudService,){}
   ngOnInit() {
-    this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en')
-    let current_date = new Date(this.date);
-    current_date.setDate(current_date.getDate() + 30);
-    this.date_loan = this.date
-    var datePipe = new DatePipe("en-US");
-    let deadline = datePipe.transform(current_date, 'yyyy-MM-dd');
-    if(deadline != null)
-      this.date_deadline = deadline
     this.get_data("")
   }
   edit(transaction: string, indice: number){
     this.register = true
     this.modify = true
     this.view = false
-    console.log(transaction)
+    this.actual_reserve = this.reserves[indice].id_reserve
+    this.account_number = this.reserves[indice].account
+    this.book = this.reserves[indice].isbn
+    this.date_deliver = this.reserves[indice].date_deliver
+    this.get_alumn_data();
+    this.get_book_data();
   }
   async get_data(where: string){
     this.crud.get_reserve(where).subscribe(
@@ -92,12 +86,13 @@ export class ReservesComponent {
   }
 
   deliver_reserve(){
-    this.crud.return_book(this.actual_loan).subscribe(
+    this.crud.return_reserve(this.actual_reserve).subscribe(
       (res: any) => {
         this.crud.update_book_status(this.id_book,"1").subscribe(
           (res: any) => {
-            window.alert("Libro devuelto")
-            this.clear_form()
+            window.alert("Libro entregado")
+            this.register = false
+            this.view = true
           },
           (error) => {
           }
@@ -146,7 +141,6 @@ export class ReservesComponent {
           }else{
             this.state = "No Disponible"
           }
- 
         }else{
           this.title = "-"
           this.isbn = "-"
@@ -159,39 +153,8 @@ export class ReservesComponent {
       }
     );
   }
-  change_deadline(){
-    let current_date = new Date(this.date_loan);
-    current_date.setDate(current_date.getDate() + 30);
-    var datePipe = new DatePipe("en-US");
-    let deadline = datePipe.transform(current_date, 'yyyy-MM-dd');
-    if(deadline != null)
-      this.date_deadline = deadline
-  }
   clear_form(){
-    this.name = "-"
-    this.account = "-"
-    this.group = "-"
-    this.carreer = "-"
-    this.phone = "-"
-    this.email = "-"
-    this.title = "-"
-    this.isbn = "-"
-    this.category = "-"
-    this.author = "-"
-    this.state = "-"
-    this.account_number = ""
-    this.book = ""
-    this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en')
-    let current_date = new Date(this.date);
-    current_date.setDate(current_date.getDate() + 30);
-    this.date_loan = this.date
-    var datePipe = new DatePipe("en-US");
-    let deadline = datePipe.transform(current_date, 'yyyy-MM-dd');
-    if(deadline != null)
-      this.date_deadline = deadline
     this.register=false
     this.view=true
-    this.modify=false
-    this.get_data(this.filter_search)
   }
 }

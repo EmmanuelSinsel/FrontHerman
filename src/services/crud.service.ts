@@ -138,4 +138,12 @@ export class CrudService {
     return this.http.post<any>(this.url+"/get_full_reserve/",data, {headers: this.getCustomHeaders()});
   }
 
+  return_reserve(where: string){
+    const data = {
+      state: "0"
+    }
+    return this.http.put<any>(this.url+"/update_reserve/id_reserve = '"+where+"'", data, {headers: this.getCustomHeaders()});
+
+  }
+
 }
