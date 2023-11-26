@@ -19,7 +19,6 @@
     height: 100%;
     align-items: center;
     transition: height 1s ease;
-    overflow-y: auto;
 }
 
 .auth-form{
@@ -187,4 +186,14 @@ table {border: none;}
     background-size: 70%;
     background-repeat: no-repeat;
     cursor:pointer;
+}
+#table-wrapper {
+    position:relative;
+}
+#table-scroll {
+    height:600px;
+    overflow:auto;  
+}
+#table-wrapper table {
+    width:100%;
 }

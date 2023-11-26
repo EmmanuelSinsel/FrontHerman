@@ -131,13 +131,13 @@ export class LoansComponent {
     }
     this.crud.register_loan(data).subscribe(
       (res: any) => {
-        this.crud.update_book_status(this.id_book,"0").subscribe(
-          (res: any) => {
+        // this.crud.update_book_status(this.id_book,"0").subscribe(
+        //   (res: any) => {
 
-          },
-          (error) => {
-          }
-        );
+        //   },
+        //   (error) => {
+        //   }
+        // );
         if(res['status']=="200"){
           window.alert("Prestamo Registrado")
           this.clear_form()
@@ -245,7 +245,8 @@ export class LoansComponent {
           this.category = res[0]['category']
           this.author = res[0]['author']
           this.id_book = res[0]['id_book']
-          if(res[0]['status'] == 1){
+          console.log(res[0]['status'])
+          if(res[0]['status'] > 0){
             this.state = "Disponible"
           }else{
             this.state = "No Disponible"

@@ -1,6 +1,10 @@
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs';
+import { author_register } from 'src/app/admin-portal/authors/authors.component';
+import { book_filter, book_register } from 'src/app/admin-portal/books/books.component';
+import { category_register } from 'src/app/admin-portal/generes/generes.component';
 import { loan_register } from 'src/app/admin-portal/loans/loans.component';
 import { AppModule } from 'src/app/app.module';
 import { HeadersModule } from 'src/app/headers/headers.module';
@@ -113,19 +117,95 @@ export class CrudService {
     }
     return this.http.post<any>(this.url+"/get_book_data/",data, {headers: this.getCustomHeaders()});
   }
+  get_books(filter: book_filter){
+    let params = {
+      title: filter.title,
+      isbn:filter.isbn,
+      category:filter.category,
+      author:filter.author,
+    }
+    return this.http.post<any>(this.url+"/get_full_book/",params, {headers: this.getCustomHeaders()});
+  }
+  register_book(book: book_register){
+    let params = {
+      title: book.title,
+      isbn:book.isbn,
+      category:book.category,
+      author:book.author,
+      stock:book.stock,
+      token: book.token,
+      state:"1"
+    }
+    return this.http.post<any>(this.url+"/register_book/",params, {headers: this.getCustomHeaders()});
+  }
+  update_book(book: book_register, actual_book: string){
+    let params = {
+      title: book.title,
+      isbn:book.isbn,
+      category:book.category,
+      author:book.author,
+      stock:book.stock,
+      state:"1",
+      token: book.token,
+      where: actual_book
+    }
+    return this.http.post<any>(this.url+"/update_book/",params, {headers: this.getCustomHeaders()});
+  }
+  delete_book(where:string){
+    return this.http.delete<any>(this.url+"/delete_book/id_book = '"+where+"'", {headers: this.getCustomHeaders()});
+  }
   //CATEGORIAS
   get_category(where: string){
     if(where==""){
       where="*"
     }
-    return this.http.get<any>(this.url+"/list_categoty/"+where, {headers: this.getCustomHeaders()});
+    return this.http.get<any>(this.url+"/list_category/"+where, {headers: this.getCustomHeaders()});
+  }
+  register_category(category: category_register){
+    let params = {
+      category: category.category,
+      token: category.token,
+      state:"1"
+    }
+    return this.http.post<any>(this.url+"/insert_category/",params, {headers: this.getCustomHeaders()});
+  }
+  update_category(category: category_register, where: string){
+    let params = {
+      category: category.category,
+      token: category.token,
+      state:"1"
+    }
+    console.log(category)
+    return this.http.put<any>(this.url+"/update_category/id_category = '"+where+"'",params, {headers: this.getCustomHeaders()});
+  }
+  delete_category(where:string){
+    return this.http.delete<any>(this.url+"/delete_category/id_category = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //AUTORES
-  get_author(where: string){
+  get_authors(where: string){
     if(where==""){
       where="*"
     }
     return this.http.get<any>(this.url+"/list_author/"+where, {headers: this.getCustomHeaders()});
+  }
+  register_author(author: author_register){
+    let params = {
+      name: author.name,
+      token: author.token,
+      state:"1"
+    }
+    return this.http.post<any>(this.url+"/insert_author/",params, {headers: this.getCustomHeaders()});
+  }
+  update_author(author: author_register, where: string){
+    let params = {
+      name: author.name,
+      token: author.token,
+      state:"1"
+    }
+    return this.http.put<any>(this.url+"/update_author/id_author = '"+where+"'",params, {headers: this.getCustomHeaders()});
+  }
+  delete_author(where:string){
+    return this.http.delete<any>(this.url+"/delete_author/id_author = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //DEVOLUCIONES
   get_reserve(where: string){

@@ -1,1 +1,61 @@
-<p>generes works!</p>
+<div class="container">
+    <br><br>
+    <div *ngIf="view" style="width: 50%;">
+        <div class="centerbar">
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Nombre" [(ngModel)]="filter">
+            </div>
+            <div class="search" (click)="get_data(filter)"></div>
+        </div><br>
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 15px;">
+                    ID
+                </th>
+                <th style="width: 80px;">
+                    NOMBRE
+                </th>
+            </tr>
+        </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of categories;let indice=index" (click)="edit(item.category, indice)" class="row">
+                        <td style="width: 15px;">
+                            {{item.id_category}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.category}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="btn-container">
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVA CATEGORIA</button>
+        </div>
+    </div>
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div *ngIf="register" class="form">
+            <div style="margin-left: 10px; width: 100%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos de la Categorita</label><br><br>
+                <label>Nombre</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Titulo" [(ngModel)]="category">
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="btn-container" *ngIf="register">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" *ngIf="!modify" (click)="register_category()" style="background-color: #3C4F45;">REGISTRAR CATEGORIA</button>
+                <button class="btn" *ngIf="!modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+                <button class="btn" *ngIf="modify" (click)="delete_category()" style="background-color:rgb(255, 82, 82);">ELIMINAR CATEGORIA</button>
+                <button class="btn" *ngIf="modify" (click)="update_category()" style="background-color:chocolate;">MODIFICAR CATEGORIA</button>
+                <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>

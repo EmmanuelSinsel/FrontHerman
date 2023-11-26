@@ -7,54 +7,60 @@
                 <div class="search" (click)="get_data(filter_search)"></div>
             </div>
         </div><br>
-        <table class="item-table">
+        <table>
             <tr>
-                <th>
+                <th style="width: 20px;">
                     ID
                 </th>
-                <th>
+                <th style="width: 80px;">
                     CUENTA
                 </th>
-                <th>
+                <th style="width: 80px;">
                     ISBN
                 </th>
-                <th>
+                <th style="width: 80px; overflow: hidden;">
                     LIBRO
                 </th>
-                <th>
+                <th style="width: 80px;">
                     FECHA DE PRESTAMO
                 </th>
-                <th>
+                <th style="width: 80px;">
                     FECHA LIMITE
                 </th>
-                <th>
+                <th style="width: 100px;">
                     FECHA DE REGRESO
                 </th>
             </tr>
-            <tr *ngFor="let item of loans;let indice=index" (click)="edit(item.id_transaction, indice)" class="row">
-                <td>
-                    {{item.id_transaction}}
-                </td>
-                <td>
-                    {{item.account}}
-                </td>
-                <td>
-                    {{item.isbn}}
-                </td>
-                <td>
-                    {{item.book}}
-                </td>
-                <td>
-                    {{item.date_transaction}}
-                </td>
-                <td>
-                    {{item.date_deadline}}
-                </td>
-                <td>
-                    {{item.date_return}}
-                </td>
-            </tr>
         </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of loans;let indice=index" (click)="edit(item.id_transaction, indice)" class="row">
+                        <td style="width: 20px;">
+                            {{item.id_transaction}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.account}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.isbn}}
+                        </td>
+                        <td style="width: 80px; overflow: hidden;">
+                            {{item.book}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.date_transaction}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.date_deadline}}
+                        </td>
+                        <td style="width: 100px;">
+                            {{item.date_return}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <br>
         <div class="btn-container">
             <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO PRESTAMO</button>
