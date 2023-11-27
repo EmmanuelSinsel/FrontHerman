@@ -1,0 +1,128 @@
+<div class="container">
+    <br><br>
+    <div *ngIf="view" style="width: 80%;">
+        <div class="centerbar">
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Numero de Cuenta" [(ngModel)]="filter">
+            </div>
+            <div class="search" (click)="get_data(filter)"></div>
+        </div><br>
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 15px;">
+                    ID
+                </th>
+                <th style="width: 200px;">
+                    NOMBRE
+                </th>
+                <th style="width: 150px;">
+                    NUMERO DE CUENTA
+                </th>
+                <th style="width: 80px;">
+                    USUARIO
+                </th>
+                <th style="width: 80px;">
+                    CARRERA
+                </th>
+                <th style="width: 200px;">
+                    EMAIL
+                </th>
+                <th style="width: 80px;">
+                    TELEFONO
+                </th>
+            </tr>
+        </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of alumns;let indice=index" (click)="edit(item.id_alumn, indice)" class="row">
+                        <td style="width: 15px;">
+                            {{item.id_alumn}}
+                        </td>
+                        <td style="width: 200px;">
+                            {{item.full_name}}
+                        </td>
+                        <td style="width: 150px;">
+                            {{item.account_number}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.user}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.carreer}}
+                        </td>
+                        <td style="width: 200px;">
+                            {{item.email}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.phone}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="btn-container">
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO AUTOR</button>
+        </div>
+    </div>
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div *ngIf="register" class="form">
+            <div style="margin-left: 10px; width: 100%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos del Prestamo</label><br><br>
+                <label>Nombre</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Numero de Cuenta" [(ngModel)]="account_number">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Nombre(s)" [(ngModel)]="first_name">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Apellido(s)" [(ngModel)]="last_name">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Usuario" [(ngModel)]="user">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Email" [(ngModel)]="email">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" type="password" placeholder="Contraseña" [(ngModel)]="password">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Carrera" [(ngModel)]="carreer">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Grupo" [(ngModel)]="school_group">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Telefono" [(ngModel)]="phone">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="ID de Libreria" [(ngModel)]="library_id">
+                </div>
+                <br>
+                <br><br>
+            </div>
+        </div>
+        <div class="btn-container" *ngIf="register">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" *ngIf="!modify" (click)="register_alumn()" style="background-color: #3C4F45;">REGISTRAR AUTOR</button>
+                <button class="btn" *ngIf="!modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+                <button class="btn" *ngIf="modify" (click)="delete_alumn()" style="background-color:rgb(255, 82, 82);">ELIMINAR AUTOR</button>
+                <button class="btn" *ngIf="modify" (click)="update_alumn()" style="background-color:chocolate;">MODIFICAR AUTOR</button>
+                <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>

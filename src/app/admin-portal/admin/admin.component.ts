@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd  } from '@angular/router';
 import { token_data } from 'src/models/models';
 import { AuthService } from 'src/services/auth.service' 
-import { SidebarComponent } from 'src/app/sidebar/sidebar.component'
+import { SidebarComponent } from 'src/app/admin-portal/frame/sidebar/sidebar.component'
 import {Location} from '@angular/common';
 @Component({
   selector: 'app-admin',
@@ -65,22 +65,22 @@ export class AdminComponent {
     if (path == "/admin/generes") {
       this.index = 6
     }
-    if (path == "admin/loans") {
+    if (path == "/admin/historial") {
       this.index = 7
     }
-    if (path == "admin/loans") {
+    if (path == "/admin/advices") {
       this.index = 8
     }
-    if (path == "admin/loans") {
+    if (path == "/admin/admin-accounts") {
       this.index = 9
     }
-    if (path == "admin/loans") {
+    if (path == "/admin/loan") {
       this.index = 10
     }
-    if (path == "admin/loans") {
+    if (path == "/admin/loan") {
       this.index = 11
     }
-    if (path == "admin/loans") {
+    if (path == "/admin/loan") {
       this.index = 12
     }
   }

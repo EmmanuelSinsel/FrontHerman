@@ -1,7 +1,6 @@
 import { Component, Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {Location} from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 @Component({
@@ -47,15 +46,15 @@ export class SidebarComponent {
         break;
       }
       case 7: {
-        this.router.navigate(['']);
+        this.location.go('admin/historial');
         break;
       }
       case 8: {
-        this.router.navigate(['']);
+        this.location.go('admin/advices');
         break;
       }
       case 9: {
-        this.router.navigate(['']);
+        this.location.go('admin/admin-accounts');
         break;
       }
       case 10: {

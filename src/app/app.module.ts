@@ -13,14 +13,18 @@ import { AdminComponent } from './admin-portal/admin/admin.component';
 import { AlumnComponent } from './alumn-portal/alumn/alumn.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { TopbarComponent } from './topbar/topbar.component';
-import { AuthorsComponent } from './admin-portal/authors/authors.component';
-import { BooksComponent } from './admin-portal/books/books.component';
-import { GeneresComponent } from './admin-portal/generes/generes.component';
-import { LoansComponent } from './admin-portal/loans/loans.component';
-import { ReservesComponent } from './admin-portal/reserves/reserves.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { TopbarComponent } from './admin-portal/frame/topbar/topbar.component';
+import { AuthorsComponent } from './admin-portal/main-functions/authors/authors.component';
+import { BooksComponent } from './admin-portal/main-functions/books/books.component';
+import { GeneresComponent } from './admin-portal/main-functions/generes/generes.component';
+import { LoansComponent } from './admin-portal/main-functions/loans/loans.component';
+import { ReservesComponent } from './admin-portal/main-functions/reserves/reserves.component';
+import { SidebarComponent } from './admin-portal/frame/sidebar/sidebar.component';
 import { AuthInterceptorService } from 'src/services/auth-interceptor.service';
+import { HistorialComponent } from './admin-portal/admin-functions/historial/historial.component';
+import { AdvicesComponent } from './admin-portal/admin-functions/advices/advices.component';
+import { AdminAccountsComponent } from './admin-portal/admin-functions/admin-accounts/admin-accounts.component';
+import { AlumnAccountsComponent } from './admin-portal/admin-functions/alumn-accounts/alumn-accounts.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,10 @@ import { AuthInterceptorService } from 'src/services/auth-interceptor.service';
     LoansComponent,
     ReservesComponent,
     SidebarComponent,
+    HistorialComponent,
+    AdvicesComponent,
+    AdminAccountsComponent,
+    AlumnAccountsComponent
   ],
   imports: [
     BrowserModule,

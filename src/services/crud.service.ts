@@ -2,13 +2,16 @@ import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
-import { author_register } from 'src/app/admin-portal/authors/authors.component';
-import { book_filter, book_register } from 'src/app/admin-portal/books/books.component';
-import { category_register } from 'src/app/admin-portal/generes/generes.component';
-import { loan_register } from 'src/app/admin-portal/loans/loans.component';
+import { author_register } from 'src/app/admin-portal/main-functions/authors/authors.component';
+import { book_filter, book_register } from 'src/app/admin-portal/main-functions/books/books.component';
+import { category_register } from 'src/app/admin-portal/main-functions/generes/generes.component';
+import { loan_register } from 'src/app/admin-portal/main-functions/loans/loans.component';
 import { AppModule } from 'src/app/app.module';
-import { HeadersModule } from 'src/app/headers/headers.module';
+import { HeadersModule } from 'src/app/admin-portal/frame/headers/headers.module';
 import { fields, loan, search } from 'src/models/models';
+import { advice_register } from 'src/app/admin-portal/admin-functions/advices/advices.component';
+import { register_list } from 'src/app/admin-portal/admin-functions/historial/historial.component';
+import { alumn_register } from 'src/app/admin-portal/admin-functions/alumn-accounts/alumn-accounts.component';
 
 @Injectable({
   providedIn: 'root'
@@ -223,7 +226,102 @@ export class CrudService {
       state: "0"
     }
     return this.http.put<any>(this.url+"/update_reserve/id_reserve = '"+where+"'", data, {headers: this.getCustomHeaders()});
-
   }
 
+  //OBSERVACIONES
+  get_advice(where: string){
+    if(where==""){
+      where="*"
+    }
+    const data = {
+      where: where
+    }
+    return this.http.post<any>(this.url+"/get_full_advice/",data, {headers: this.getCustomHeaders()});
+  }
+
+  register_advice(advice: advice_register){
+    let params = {
+      alumn: advice.account_number,
+      advice: advice.advice,
+      state:"1"
+    }
+    return this.http.post<any>(this.url+"/register_advice/",params, {headers: this.getCustomHeaders()});
+  }
+
+  update_advice(advice: advice_register, where: string){
+    let params = {
+      alumn: advice.account_number,
+      advice: advice.advice,
+      state:"1"
+    }
+    return this.http.put<any>(this.url+"/update_advice/id_author = '"+where+"'",params, {headers: this.getCustomHeaders()});
+  }
+
+  delete_advice(where: string){
+    return this.http.delete<any>(this.url+"/delete_advice/id_author = '"+where+"'", {headers: this.getCustomHeaders()});
+  }
+  //ALUMNOS
+  get_alumns(where: string){
+    if(where==""){
+      where="*"
+    }
+    return this.http.get<any>(this.url+"/list_alumn/"+where,{headers: this.getCustomHeaders()});
+  }
+  register_alumn(alumn: alumn_register){
+    let params = {
+      account_number: alumn.account_number,
+      email: alumn.email,
+      carreer: alumn.carreer,
+      first_name: alumn.first_name,
+      last_name: alumn.last_name,
+      phone: alumn.phone,
+      school_group: alumn.school_group,
+      password: alumn.password,
+      library_id: alumn.library_id,
+      user: alumn.user,
+      token: alumn.token,
+      state:"1"
+    }
+    return this.http.post<any>(this.url+"/insert_alumn/",params, {headers: this.getCustomHeaders()});
+  }
+  update_alumn(alumn: alumn_register, where: string){
+    let params: any
+    if(alumn.password != ""){
+      params = {
+        account_number: alumn.account_number,
+        email: alumn.email,
+        carreer: alumn.carreer,
+        first_name: alumn.first_name,
+        last_name: alumn.last_name,
+        phone: alumn.phone,
+        school_group: alumn.school_group,
+        password: alumn.password,
+        library_id: alumn.library_id,
+        user: alumn.user,
+        token: alumn.token,
+        state:"1"
+      }
+    }else{
+      params = {
+        account_number: alumn.account_number,
+        email: alumn.email,
+        carreer: alumn.carreer,
+        first_name: alumn.first_name,
+        last_name: alumn.last_name,
+        phone: alumn.phone,
+        school_group: alumn.school_group,
+        library_id: alumn.library_id,
+        user: alumn.user,
+        token: alumn.token,
+        state:"1"
+      }
+    }
+
+    console.log(where)
+    console.log(params)
+    return this.http.put<any>(this.url+"/update_alumn/id_alumn = '"+where+"'",params, {headers: this.getCustomHeaders()});
+  }
+  delete_alumn(where: string){
+    return this.http.delete<any>(this.url+"/delete_alumn/id_alumn = '"+where+"'", {headers: this.getCustomHeaders()});
+  }
 }

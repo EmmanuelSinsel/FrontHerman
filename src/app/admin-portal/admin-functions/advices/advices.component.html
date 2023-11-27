@@ -1,0 +1,92 @@
+<div class="container">
+    <br><br>
+    <div *ngIf="view" style="width: 50%;">
+        <div class="centerbar">
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Numero de Cuenta" [(ngModel)]="filter">
+            </div>
+            <div class="search" (click)="get_data(filter)"></div>
+        </div><br>
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 15px;">
+                    ID
+                </th>
+                <th style="width: 80px;">
+                    NUMERO DE CUENTA
+                </th>
+                <th style="width: 200px;">
+                    OBSERVACION
+                </th>
+            </tr>
+        </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of advices;let indice=index" (click)="edit(item.id_advice, indice)" class="row">
+                        <td style="width: 15px;">
+                            {{item.id_advice}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.account_number}}
+                        </td>
+                        <td style="width: 200px;">
+                            {{item.advice}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="btn-container">
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVA OBSERVACION</button>
+        </div>
+    </div>
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div *ngIf="register" class="form" style="flex-direction: row; width: 100%;">
+            <div style="margin-left: 10%; width: 50%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos de la Observacion</label><br><br>
+                <label>Numero de Cuenta</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Numero de Cuenta" [(ngModel)]="account_number" (input)="get_alumn_data()">
+                </div>
+                <br>
+                <label>Observacion</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Observacion" [(ngModel)]="advice">
+                </div>
+                <br><br>
+            </div>
+            <div style="margin-left: 50px; width: 50%;">
+                <br><br>
+                <label style="font-weight: bold;">Resumen</label>
+                <br><br>
+                <label>Informacion del Alumno</label>
+                <br><br>
+                <label>Alumno</label>
+                <p>{{name}}</p>
+                <label>Numero de Cuenta</label>
+                <p>{{account}}</p>
+                <label>Grupo</label>
+                <p>{{group}}</p>
+                <label>Carrera</label>
+                <p>{{carreer}}</p>
+                <label>Telefono</label>
+                <p>{{phone}}</p>
+                <label>Correo</label>
+                <p>{{email}}</p>
+            </div>
+        </div>
+        <br><br>
+        <div class="btn-container" *ngIf="register">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" *ngIf="!modify" (click)="register_advice()" style="background-color: #3C4F45;">REGISTRAR OBSERVACION</button>
+                <button class="btn" *ngIf="!modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+                <button class="btn" *ngIf="modify" (click)="delete_advice()" style="background-color:rgb(255, 82, 82);">ELIMINAR OBSERVACION</button>
+                <button class="btn" *ngIf="modify" (click)="update_advice()" style="background-color:chocolate;">MODIFICAR OBSERVACION</button>
+                <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>

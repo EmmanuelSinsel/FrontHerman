@@ -16,14 +16,14 @@
         <p [ngClass]="index==6 ? label_focus : label_not_focus">Categorias</p>
     </div>
     <hr>
-    <div class="side-button" (click)="route(7)">
-        <p class="side-button-label">Historial</p>
+    <div [ngClass]="index==7 ? button_focus : button_not_focus" (click)="route(7)">
+        <p [ngClass]="index==7 ? label_focus : label_not_focus">Historial</p>
     </div>
-    <div class="side-button" (click)="route(8)">
-        <p class="side-button-label">Observaciones</p>
+    <div [ngClass]="index==8 ? button_focus : button_not_focus" (click)="route(8)">
+        <p [ngClass]="index==8 ? label_focus : label_not_focus">Observaciones</p>
     </div>
-    <div class="side-button" (click)="route(9)">
-        <p class="side-button-label">Cuentas</p>
+    <div [ngClass]="index==9 ? button_focus : button_not_focus" (click)="route(9)">
+        <p [ngClass]="index==9 ? label_focus : label_not_focus">Cuentas</p>
     </div>
     <hr>
     <div class="side-button" (click)="route(10)">
