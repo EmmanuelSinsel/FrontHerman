@@ -25,6 +25,13 @@ import { HistorialComponent } from './admin-portal/admin-functions/historial/his
 import { AdvicesComponent } from './admin-portal/admin-functions/advices/advices.component';
 import { AdminAccountsComponent } from './admin-portal/admin-functions/admin-accounts/admin-accounts.component';
 import { AlumnAccountsComponent } from './admin-portal/admin-functions/alumn-accounts/alumn-accounts.component';
+import { LogsComponent } from './admin-portal/admin-functions/logs/logs.component';
+import { StatisticsComponent } from './admin-portal/admin-functions/statistics/statistics.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { LogoutAdminComponent } from './admin-portal/logout-admin/logout-admin.component';
+import { TopbarAlumnComponent } from './alumn-portal/frame/topbar-alumn/topbar-alumn.component';
+import { SidebarAlumnComponent } from './alumn-portal/frame/sidebar-alumn/sidebar-alumn.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +50,12 @@ import { AlumnAccountsComponent } from './admin-portal/admin-functions/alumn-acc
     HistorialComponent,
     AdvicesComponent,
     AdminAccountsComponent,
-    AlumnAccountsComponent
+    AlumnAccountsComponent,
+    LogsComponent,
+    StatisticsComponent,
+    LogoutAdminComponent,
+    TopbarAlumnComponent,
+    SidebarAlumnComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +66,9 @@ import { AlumnAccountsComponent } from './admin-portal/admin-functions/alumn-acc
     FormsModule,
     HttpClientModule,
     MatSidenavModule, 
-    MatButtonModule]
-  ,
+    MatButtonModule,
+    CanvasJSAngularChartsModule
+  ],
   providers: [    {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,

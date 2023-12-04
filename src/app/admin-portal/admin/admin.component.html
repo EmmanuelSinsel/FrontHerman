@@ -1,8 +1,9 @@
-<app-topbar></app-topbar>
+<app-topbar (click)="index_change()"></app-topbar>
 <div class="playground">
     <app-sidebar (click)="index_change()" class="sidebar"></app-sidebar>
     <br><br>
     <div class="main-container">
+        <app-logout-admin *ngIf="index == -1"></app-logout-admin>
         <app-loans *ngIf="index == 1"></app-loans>
         <app-reserves *ngIf="index == 3"></app-reserves>
         <app-books *ngIf="index == 4"></app-books>
@@ -11,6 +12,10 @@
         <app-historial *ngIf="index == 7"></app-historial>
         <app-advices *ngIf="index == 8"></app-advices>
         <app-alumn-accounts *ngIf="index == 9"></app-alumn-accounts>
+        <app-logs *ngIf="index == 10"></app-logs>
+        <app-statistics *ngIf="index == 11"></app-statistics>
+        <app-admin-accounts *ngIf="index == 12"></app-admin-accounts>
+
     </div>
     <div class="sidebar"></div>
 </div>

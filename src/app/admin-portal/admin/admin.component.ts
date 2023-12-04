@@ -36,12 +36,12 @@ export class AdminComponent {
           }
         },
         (error) => {
-  
         }
       );
     }
     else{
-      this.router.navigate(['admin/login']);
+      this.index=11
+      this.router.navigate(['admin/login/dashboard']);
     }
   }
   index_change(){
@@ -71,17 +71,20 @@ export class AdminComponent {
     if (path == "/admin/advices") {
       this.index = 8
     }
-    if (path == "/admin/admin-accounts") {
+    if (path == "/admin/alumn-accounts") {
       this.index = 9
     }
-    if (path == "/admin/loan") {
+    if (path == "/admin/logs") {
       this.index = 10
     }
-    if (path == "/admin/loan") {
+    if (path == "/admin") {
       this.index = 11
     }
-    if (path == "/admin/loan") {
+    if (path == "/admin/admin-accounts") {
       this.index = 12
+    }
+    if (path == "/admin/profile") {
+      this.index = -1
     }
   }
   

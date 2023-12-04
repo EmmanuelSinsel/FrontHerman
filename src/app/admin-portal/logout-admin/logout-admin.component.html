@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div class="form">
+            <div style="margin-left: 10px; width: 100%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos del Usuario</label><br><br>
+                <label>Usuario</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Usuario" [(ngModel)]="user">
+                </div>
+                <br>
+                <label>Contraseña</label>
+                <div class="input-container">
+                    <input class="crud-input" type="password" placeholder="Contraseña" [(ngModel)]="password">
+                </div>
+                <br>
+                <label>Nombre(s)</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Nombre(s)" [(ngModel)]="first_name">
+                </div>
+                <br>
+                <label>Apellido(s)</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Apellido(s)" [(ngModel)]="last_name">
+                </div>
+                <br>
+                <label>Telefono</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Telefono" [(ngModel)]="phone">
+                </div>
+                <br>
+                <label>Email</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Email" [(ngModel)]="email">
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="btn-container">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+                <button class="btn" (click)="update_admin()" style="background-color:#3C4F45;">GUARDAR CAMBIOS</button>
+                <button class="btn" (click)="logout()" style="background-color:chocolate;">CERRAR SESION</button>
+            </div>
+        </div>
+    </div>
+</div>

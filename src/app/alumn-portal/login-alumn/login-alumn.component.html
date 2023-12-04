@@ -1,25 +1,157 @@
-
-<div class="background-body container">
-    <div class="auth-form">
-        <br><br>
-        <p class="auth-label">Iniciar Sesion</p>
-        <br>
-        <div class="input-container">
-            <input matInput [(ngModel)]="data.email" placeholder="Email" class="auth-input">
+<div class="back" >
+    <div class="background-body"></div>
+    <div class="container">
+        <div class="auth-form">
+            <div class="col" *ngIf="showLogin">
+                <br><br>
+                <div class="logo">BiblioLibo</div>
+                <br>
+                <div class="input-container">
+                    <input matInput [(ngModel)]="data.email" placeholder="Email" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput type="password" [(ngModel)]="data.password" placeholder="Contraseña" class="auth-input">
+                </div>
+                <div class="left-text" (click)="pr_init()">
+                    <p class="help-text url_text">Olvidaste tu contraseña?</p>
+                </div>
+                <button class="login-btn" (click)="login()">Iniciar Sesión</button>
+                <br>
+                <div class="center-text" *ngIf="showLoginError" >
+                    <p class="error-text">{{loginError}}</p>
+                </div>
+                <div class="left-text" (click)="r_init()">
+                    <p class="help-text url_text">No tienes una cuenta? Registrate aqui</p>
+                </div>
+                <br>
+            </div>
+            <div class="col" *ngIf="showPR1">
+                <br><br>
+                <p class="auth-label">Recuperar Contraseña</p>
+                <br>
+                <div class="left-text">
+                    <p class="help-text">Introduce tu Correo o Telefono u Usuario</p>
+                </div>
+                <div class="input-container">
+                    <input matInput type="email" [(ngModel)]="password_recover.email" placeholder="Escribe aqui..." class="auth-input">
+                </div>
+                <br><br>
+                <button class="login-btn" (click)="pr()">Continuar</button>
+                <br><br>
+            </div>
+            <div class="col" *ngIf="showPR2">
+                <br><br>
+                <p class="auth-label">Recuperar Contraseña</p>
+                <br>
+                <div class="left-text">
+                    <p class="help-text">Si existe una cuenta registrada con ese correo, enviaremos un codigo para verificar que eres el propietario.</p>
+                </div>
+                <div class="input-container">
+                    <input matInput [(ngModel)]="recover_data.token" placeholder="Codigo de Recuperacion" class="auth-input">
+                </div>
+                <br><br>
+                <button class="login-btn" (click)="pr_verify()">Continuar</button>
+                <br>
+                <div class="center-text" *ngIf="showTokenError" >
+                    <p class="error-text">{{tokenError}}</p>
+                </div>
+                <br>
+            </div>
+            <div class="col" *ngIf="showPR3">
+                <br><br>
+                <p class="auth-label">Nueva Contraseña</p>
+                <br>
+                <div class="left-text">
+                    <p class="help-text">Introduce tu nueva Contraseña:</p>
+                </div>
+                <div class="input-container">
+                    <input matInput type="password" [(ngModel)]="rpassword.password" placeholder="Contraseña" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput type="password" [(ngModel)]="rpassword.confirm_password" placeholder="Confirmar Contraseña" class="auth-input">
+                </div>
+                <br><br>
+                <button class="login-btn" (click)="pr_reset()">Continuar</button>
+                <br>
+                <div class="center-text" *ngIf="showPasswordResetError">
+                    <p class="error-text">{{prError}}</p>
+                </div>
+                <br>
+            </div>
+            <div class="col" *ngIf="r1">
+                <br><br>
+                <p class="auth-label">Nueva cuenta</p>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.account_number" placeholder="Numero de cuenta" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.user" placeholder="Usuario" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.email" placeholder="Email" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput type="password" [(ngModel)]="register_data.password" placeholder="Contraseña" class="auth-input">
+                </div>
+                <br>
+                <button class="login-btn" (click)="r_data()">Siguiente</button>
+                <br><br>
+            </div>
+            <div class="col" *ngIf="r2">
+                <br><br>
+                <p class="auth-label">Datos del alumno</p>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.group" placeholder="Grupo" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.carreer" placeholder="Carrera" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.first_name" placeholder="Nombre(s)" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.last_name" placeholder="Apellido(s)" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.phone" placeholder="Telefono" class="auth-input">
+                </div>
+                <br>
+                <div class="input-container">
+                    <input matInput  [(ngModel)]="register_data.library_id" placeholder="Libreria" class="auth-input">
+                </div>
+                <br>
+                <button class="login-btn" (click)="r_msg()">Siguiente</button>
+                <br><br>
+            </div>
+            <div class="col" *ngIf="r3">
+                <br><br>
+                <p class="auth-label">Verificar correo</p>
+                <br>
+                <div class="left-text">
+                    <p class="help-text">Enviaremos un codigo para verificar que eres el propietario del correo que registraste.</p>
+                </div>
+                <div class="input-container">
+                    <input matInput [(ngModel)]="activation_data.token" placeholder="Codigo de Activacion" class="auth-input">
+                </div>
+                <br><br>
+                <button class="login-btn" (click)="r_verify()">Continuar</button>
+                <br>
+                <div class="center-text" *ngIf="showTokenError" >
+                    <p class="error-text">{{tokenError}}</p>
+                </div>
+                <br>
+            </div>
         </div>
-        <br>
-        <div class="input-container">
-            <input matInput type="password" [(ngModel)]="data.password" placeholder="Contraseña" class="auth-input">
-        </div>
-        <div class="left-text">
-            <p class="help-text">Olvidaste tu contraseña?</p>
-        </div>
-        <button class="login-btn" (click)="login()">Iniciar Sesion</button>
-        <div class="left-text">
-            <p class="help-text">Aun no eres miembro? Unete aqui</p>
-        </div>
-        <br>
     </div>
-
 </div>
-

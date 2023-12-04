@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-topbar',
-  templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.css']
+  selector: 'app-topbar-alumn',
+  templateUrl: './topbar-alumn.component.html',
+  styleUrls: ['./topbar-alumn.component.css']
 })
-export class TopbarComponent {
-  
+export class TopbarAlumnComponent {
   constructor(private router: Router,
     private location: Location){}
 

@@ -1,5 +1,9 @@
 <div class="side-container">
     <br>
+    <div [ngClass]="index==11 ? button_focus : button_not_focus" (click)="route(11)">
+        <p [ngClass]="index==11 ? label_focus : label_not_focus">Dashboard</p>
+    </div>
+    <hr>
     <div [ngClass]="index==1 ? button_focus : button_not_focus" (click)="route(1)">
         <p [ngClass]="index==1 ? label_focus : label_not_focus">Prestamos</p>
     </div>
@@ -16,23 +20,17 @@
         <p [ngClass]="index==6 ? label_focus : label_not_focus">Categorias</p>
     </div>
     <hr>
-    <div [ngClass]="index==7 ? button_focus : button_not_focus" (click)="route(7)">
-        <p [ngClass]="index==7 ? label_focus : label_not_focus">Historial</p>
-    </div>
     <div [ngClass]="index==8 ? button_focus : button_not_focus" (click)="route(8)">
         <p [ngClass]="index==8 ? label_focus : label_not_focus">Observaciones</p>
     </div>
     <div [ngClass]="index==9 ? button_focus : button_not_focus" (click)="route(9)">
-        <p [ngClass]="index==9 ? label_focus : label_not_focus">Cuentas</p>
+        <p [ngClass]="index==9 ? label_focus : label_not_focus">Alumnos</p>
     </div>
     <hr>
-    <div class="side-button" (click)="route(10)">
-        <p class="side-button-label">Registro de Acciones</p>
+    <div [ngClass]="index==10 ? button_focus : button_not_focus" (click)="route(10)">
+        <p [ngClass]="index==10 ? label_focus : label_not_focus">Registro de Acciones</p>
     </div>
-    <div class="side-button" (click)="route(11)">
-        <p class="side-button-label">Estadisticas</p>
-    </div>
-    <div class="side-button" (click)="route(12)">
-        <p class="side-button-label">Cuentas</p>
+    <div [ngClass]="index==12 ? button_focus : button_not_focus" (click)="route(12)">
+        <p [ngClass]="index==12 ? label_focus : label_not_focus">Administradores</p>
     </div>
 </div>

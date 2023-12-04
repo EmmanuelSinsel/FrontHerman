@@ -12,15 +12,18 @@ import { fields, loan, search } from 'src/models/models';
 import { advice_register } from 'src/app/admin-portal/admin-functions/advices/advices.component';
 import { register_list } from 'src/app/admin-portal/admin-functions/historial/historial.component';
 import { alumn_register } from 'src/app/admin-portal/admin-functions/alumn-accounts/alumn-accounts.component';
+import { AuthService } from './auth.service';
+import { admin_register } from 'src/app/admin-portal/admin-functions/admin-accounts/admin-accounts.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
-
+  now = new Date();
   constructor(
     private app: AppModule,
-    private http: HttpClient) {}
+    private http: HttpClient,
+    private auth: AuthService) {}
   url: string = this.app.url;
 
   public getCustomHeaders(): any {
@@ -43,14 +46,10 @@ export class CrudService {
   }
 
   //ADMIN--------------------------------------------------------------------------------------------------
-  get_admin(where: string){
-
-  }
   get_user_token(token: string){
     return this.http.get<any>(this.url+"/list_token/token = '"+token+"'", {headers: this.getCustomHeaders()})
   }
   get_user_library(user: string){
-
         return this.http.get<any>(this.url+"/list_admin/id_admin = '"+user+"'", {headers: this.getCustomHeaders()})
   }
   //PRESTAMOS
@@ -74,6 +73,7 @@ export class CrudService {
       state:"1",
       token: data.token
     }
+    this.auth.log(data.token,"Prestamo registrado el dia: "+this.now)
     return this.http.post<any>(this.url+"/register_loan/", params, {headers: this.getCustomHeaders()});
   }
   update_loan(data: loan_register, where: string){
@@ -88,6 +88,7 @@ export class CrudService {
       token: data.token,
       where: where
     }
+    this.auth.log(data.token,"Prestamo actualizado el dia: "+this.now)
     return this.http.post<any>(this.url+"/update_loan/", params, {headers: this.getCustomHeaders()});
   }
   delete_loan(){
@@ -98,6 +99,8 @@ export class CrudService {
     const data = {
       date_return: formatDate(new Date(), 'yyyy-MM-dd', 'en')
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Libro retornado el dia: "+this.now)
     return this.http.put<any>(this.url+"/update_loan/id_transaction = '"+where+"'", data, {headers: this.getCustomHeaders()});
   }
   //ALUMNOS
@@ -139,6 +142,8 @@ export class CrudService {
       token: book.token,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Libro registrado el dia: "+this.now)
     return this.http.post<any>(this.url+"/register_book/",params, {headers: this.getCustomHeaders()});
   }
   update_book(book: book_register, actual_book: string){
@@ -147,14 +152,18 @@ export class CrudService {
       isbn:book.isbn,
       category:book.category,
       author:book.author,
-      stock:book.stock,
+      status:book.stock,
       state:"1",
       token: book.token,
       where: actual_book
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Libro actualizado el dia: "+this.now)
     return this.http.post<any>(this.url+"/update_book/",params, {headers: this.getCustomHeaders()});
   }
   delete_book(where:string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Libro eliminado el dia: "+this.now)
     return this.http.delete<any>(this.url+"/delete_book/id_book = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //CATEGORIAS
@@ -170,6 +179,8 @@ export class CrudService {
       token: category.token,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Categoria registrada el dia: "+this.now)
     return this.http.post<any>(this.url+"/insert_category/",params, {headers: this.getCustomHeaders()});
   }
   update_category(category: category_register, where: string){
@@ -179,9 +190,13 @@ export class CrudService {
       state:"1"
     }
     console.log(category)
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Categoria actualizada el dia: "+this.now)
     return this.http.put<any>(this.url+"/update_category/id_category = '"+where+"'",params, {headers: this.getCustomHeaders()});
   }
   delete_category(where:string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Categoria eliminada el dia: "+this.now)
     return this.http.delete<any>(this.url+"/delete_category/id_category = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //AUTORES
@@ -197,6 +212,8 @@ export class CrudService {
       token: author.token,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Autor registrado el dia: "+this.now)
     return this.http.post<any>(this.url+"/insert_author/",params, {headers: this.getCustomHeaders()});
   }
   update_author(author: author_register, where: string){
@@ -205,9 +222,13 @@ export class CrudService {
       token: author.token,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Autor actualizado el dia: "+this.now)
     return this.http.put<any>(this.url+"/update_author/id_author = '"+where+"'",params, {headers: this.getCustomHeaders()});
   }
   delete_author(where:string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Autor eliminado el dia: "+this.now)
     return this.http.delete<any>(this.url+"/delete_author/id_author = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //DEVOLUCIONES
@@ -225,6 +246,8 @@ export class CrudService {
     const data = {
       state: "0"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Reserva entregada el dia: "+this.now)
     return this.http.put<any>(this.url+"/update_reserve/id_reserve = '"+where+"'", data, {headers: this.getCustomHeaders()});
   }
 
@@ -245,6 +268,8 @@ export class CrudService {
       advice: advice.advice,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Observacion anotada el dia: "+this.now)
     return this.http.post<any>(this.url+"/register_advice/",params, {headers: this.getCustomHeaders()});
   }
 
@@ -254,10 +279,14 @@ export class CrudService {
       advice: advice.advice,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Observacion actualizada el dia: "+this.now)
     return this.http.put<any>(this.url+"/update_advice/id_author = '"+where+"'",params, {headers: this.getCustomHeaders()});
   }
 
   delete_advice(where: string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Observacion eliminada el dia: "+this.now)
     return this.http.delete<any>(this.url+"/delete_advice/id_author = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //ALUMNOS
@@ -282,6 +311,8 @@ export class CrudService {
       token: alumn.token,
       state:"1"
     }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Alumno registrado el dia: "+this.now)
     return this.http.post<any>(this.url+"/insert_alumn/",params, {headers: this.getCustomHeaders()});
   }
   update_alumn(alumn: alumn_register, where: string){
@@ -316,12 +347,91 @@ export class CrudService {
         state:"1"
       }
     }
-
-    console.log(where)
-    console.log(params)
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Alumno actualizado el dia: "+this.now)
     return this.http.put<any>(this.url+"/update_alumn/id_alumn = '"+where+"'",params, {headers: this.getCustomHeaders()});
   }
   delete_alumn(where: string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Alumno eliminado el dia: "+this.now)
     return this.http.delete<any>(this.url+"/delete_alumn/id_alumn = '"+where+"'", {headers: this.getCustomHeaders()});
   }
+  //LOGS
+  get_logs(where: string){
+    if(where==""){
+      where="*"
+    }else{
+      where = "user = '"+where+"'"
+    }
+    return this.http.get<any>(this.url+"/list_log/"+where,{headers: this.getCustomHeaders()});
+  }
+  //ADMINISTRADORES
+  get_admin_profile(){
+    let token = localStorage.getItem("token_admin")
+    let params = {
+      token: token
+    }
+    return this.http.post<any>(this.url+"/get_admin_profile/",params,{headers: this.getCustomHeaders()});
+
+  }
+  get_admins(where: string){
+    if(where==""){
+      where="*"
+    }
+    return this.http.get<any>(this.url+"/list_admin/"+where,{headers: this.getCustomHeaders()});
+  }
+
+  register_admin(admin: admin_register){
+    let params = {
+      user: admin.user,
+      password: admin.password,
+      first_name: admin.first_name,
+      last_name: admin.last_name,
+      phone: admin.phone,
+      email: admin.email,
+      token: admin.token,
+      state:"1"
+    }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Alumno registrado el dia: "+this.now)
+    return this.http.post<any>(this.url+"/insert_admin/",params, {headers: this.getCustomHeaders()});
+  }
+  update_admin(admin: admin_register, where: string){
+    let params: any
+    if(admin.password != ""){
+      params = {
+        user: admin.user,
+        password: admin.password,
+        first_name: admin.first_name,
+        last_name: admin.last_name,
+        phone: admin.phone,
+        email: admin.email,
+        token: admin.token,
+        state:"1"
+      }
+    }else{
+      params = {
+      user: admin.user,
+      first_name: admin.first_name,
+      last_name: admin.last_name,
+      phone: admin.phone,
+      email: admin.email,
+      token: admin.token,
+      state:"1"
+      }
+    }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Alumno actualizado el dia: "+this.now)
+    return this.http.put<any>(this.url+"/update_admin/id_admin = '"+where+"'",params, {headers: this.getCustomHeaders()});
+  }
+  delete_admin(where: string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Alumno eliminado el dia: "+this.now)
+    return this.http.delete<any>(this.url+"/delete_admin/id_admin = '"+where+"'", {headers: this.getCustomHeaders()});
+  }
+  //ESTADISTICAS
+  get_statistics(){
+    return this.http.get<any>(this.url+"/get_full_statistics/",{headers: this.getCustomHeaders()});
+  }
+
 }

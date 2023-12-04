@@ -19,6 +19,7 @@
     height: 100%;
     align-items: center;
     transition: height 1s ease;
+    overflow-y: auto;
 }
 
 .auth-form{
@@ -155,8 +156,7 @@ table {border: none;}
     outline-width: 0px;
 }
 .searchbar-container{
-    width: 40%;
-    margin-left: 15px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -169,14 +169,14 @@ table {border: none;}
     outline-width: 0px;
 }
 .centerbar{
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 .search{
-    margin-left: 15px;
+    margin-right: 5px;
     width: 30px;
     height: 30px;
     justify-content: center;
@@ -187,14 +187,4 @@ table {border: none;}
     background-size: 70%;
     background-repeat: no-repeat;
     cursor:pointer;
-}
-#table-wrapper {
-    position:relative;
-}
-#table-scroll {
-    height:600px;
-    overflow:auto;  
-}
-#table-wrapper table {
-    width:100%;
 }

@@ -61,6 +61,7 @@ export class LoansComponent {
   category: string = "-"
   author: string = "-"
   state: string = "-"
+  stock: number = 0
   constructor(private crud: CrudService,){}
   ngOnInit() {
     this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en')
@@ -198,7 +199,7 @@ export class LoansComponent {
   return_loan(){
     this.crud.return_book(this.actual_loan).subscribe(
       (res: any) => {
-        this.crud.update_book_status(this.id_book,"1").subscribe(
+        this.crud.update_book_status(this.id_book,String(this.stock+1)).subscribe(
           (res: any) => {
             window.alert("Libro devuelto")
             this.clear_form()
@@ -246,6 +247,7 @@ export class LoansComponent {
           this.author = res[0]['author']
           this.id_book = res[0]['id_book']
           console.log(res[0]['status'])
+          this.stock = Number(res[0]['status'])
           if(res[0]['status'] > 0){
             this.state = "Disponible"
           }else{

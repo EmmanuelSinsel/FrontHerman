@@ -54,19 +54,19 @@ export class SidebarComponent {
         break;
       }
       case 9: {
-        this.location.go('admin/admin-accounts');
+        this.location.go('admin/alumn-accounts');
         break;
       }
       case 10: {
-        this.router.navigate(['']);
+        this.location.go('admin/logs');
         break;
       }
       case 11: {
-        this.router.navigate(['']);
+        this.location.go('admin');
         break;
       }
       case 12: {
-        this.router.navigate(['']);
+        this.location.go('admin/admin-accounts');
         break;
       }
     }
