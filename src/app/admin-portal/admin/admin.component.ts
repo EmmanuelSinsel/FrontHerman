@@ -4,6 +4,7 @@ import { token_data } from 'src/models/models';
 import { AuthService } from 'src/services/auth.service' 
 import { SidebarComponent } from 'src/app/admin-portal/frame/sidebar/sidebar.component'
 import {Location} from '@angular/common';
+import { CrudService } from 'src/services/crud.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -12,11 +13,13 @@ import {Location} from '@angular/common';
 
 export class AdminComponent {
   showFiller = false;
-
+  library: string = ""
   constructor(private Auth: AuthService,
               private router: Router,
               private Sidebar: SidebarComponent,
-              private location: Location){
+              private location: Location,
+              private crud: CrudService
+              ){
               }
   href: string = ""
   index: Number = 0;
@@ -41,7 +44,7 @@ export class AdminComponent {
     }
     else{
       this.index=11
-      this.router.navigate(['admin/login/dashboard']);
+      this.router.navigate(['admin/login']);
     }
   }
   index_change(){
@@ -50,7 +53,7 @@ export class AdminComponent {
     if (path == "/admin/loans") {
       this.index = 1
     }
-    if (path == "/admin/returns") {
+    if (path == "/admin/slopes") {
       this.index = 2
     }
     if (path == "/admin/reserves") {
@@ -82,6 +85,9 @@ export class AdminComponent {
     }
     if (path == "/admin/admin-accounts") {
       this.index = 12
+    }
+    if (path == "/admin/libraries") {
+      this.index = 13
     }
     if (path == "/admin/profile") {
       this.index = -1

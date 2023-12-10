@@ -61,28 +61,45 @@ export class ReservesComponent {
     this.get_book_data();
   }
   async get_data(where: string){
-    this.crud.get_reserve(where).subscribe(
+
+    this.crud.get_admin_profile().subscribe(
       (res: any) => {
         console.log(res)
-        this.reserves = []
-        for(let i = 0; i <= Object.keys(res).length-1; i++){
-          let temp_reserve: reserve_list = new reserve_list
-          temp_reserve.account = res[i]['account_number']
-          temp_reserve.isbn = res[i]['isbn']
-          temp_reserve.book = res[i]['book']
-          temp_reserve.id_reserve = res[i]['id_reserve']
-          temp_reserve.date_deliver = res[i]['date_pickup']
-          if(res[i]['state'] == '1'){
-            temp_reserve.delivered = "PENDIENTE"
+        if(res['profile']['master'] != "1"){
+          if(where==""){
+            where = "book.id_library = '"+res['profile']['library_id']+"'"
           }else{
-            temp_reserve.delivered = "ENTREGADO"
+            where = "alumn.account_number = '"+where+"' AND book.id_library = '"+res['profile']['library_id']+"'"
           }
-          this.reserves.push(temp_reserve)
+        }else{
+          where = "*"
         }
-      },
-      (error) => {
+        this.crud.get_reserve(where).subscribe(
+          (res: any) => {
+            console.log(res)
+            this.reserves = []
+            for(let i = 0; i <= Object.keys(res).length-1; i++){
+              let temp_reserve: reserve_list = new reserve_list
+              temp_reserve.account = res[i]['account_number']
+              temp_reserve.isbn = res[i]['isbn']
+              temp_reserve.book = res[i]['book']
+              temp_reserve.id_reserve = res[i]['id_reserve']
+              temp_reserve.date_deliver = res[i]['date_pickup']
+              if(res[i]['state'] == '1'){
+                temp_reserve.delivered = "PENDIENTE"
+              }else{
+                temp_reserve.delivered = "ENTREGADO"
+              }
+              this.reserves.push(temp_reserve)
+            }
+          },
+          (error) => {
+          }
+        );
       }
     );
+
+    
   }
 
   deliver_reserve(){

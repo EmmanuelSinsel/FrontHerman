@@ -19,7 +19,6 @@
     height: 100%;
     align-items: center;
     transition: height 1s ease;
-    background-color: white;
 }
 
 .auth-form{

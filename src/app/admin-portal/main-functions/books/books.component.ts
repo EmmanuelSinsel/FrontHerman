@@ -11,11 +11,12 @@ export class book_list{
   stock: string = ""
 }
 
-export class book_filter{
+export class book_filter_admin{
   title: string = ""
   isbn: string = ""
   category: string = ""
   author: string = ""
+  library_id: string = ""
 }
 
 export class book_register{
@@ -60,7 +61,7 @@ export class BooksComponent {
     this.get_data(false)
   }
   async get_data(filter: boolean){
-    let filters: book_filter = new book_filter
+    let filters: book_filter_admin = new book_filter_admin
     filters.title = this.filter_title
     filters.isbn = this.filter_isbn
     filters.category = this.filter_category
@@ -69,24 +70,34 @@ export class BooksComponent {
     if(filters.isbn == ""){filters.isbn="*"}
     if(filters.category == ""){filters.category="*"}
     if(filters.author == ""){filters.author="*"}
-    this.crud.get_books(filters).subscribe(
+    if(filters.library_id == ""){filters.library_id="*"}
+    this.crud.get_admin_profile().subscribe(
       (res: any) => {
         console.log(res)
-        this.books = []
-        for(let i = 0; i <= Object.keys(res).length-1; i++){
-          let temp_loan: book_list = new book_list
-          temp_loan.id_book = res[i]['id_book']
-          temp_loan.title = res[i]['title']
-          temp_loan.isbn = res[i]['isbn']
-          temp_loan.category = res[i]['category']
-          temp_loan.author = res[i]['author']
-          temp_loan.stock = res[i]['stock']
-          this.books.push(temp_loan)
+        if(res['profile']['master'] != "1"){
+          filters.library_id = res['profile']['id_library']
         }
-      },
-      (error) => {
+        this.crud.get_books(filters).subscribe(
+          (res: any) => {
+            console.log(res)
+            this.books = []
+            for(let i = 0; i <= Object.keys(res).length-1; i++){
+              let temp_loan: book_list = new book_list
+              temp_loan.id_book = res[i]['id_book']
+              temp_loan.title = res[i]['title']
+              temp_loan.isbn = res[i]['isbn']
+              temp_loan.category = res[i]['category']
+              temp_loan.author = res[i]['author']
+              temp_loan.stock = res[i]['stock']
+              this.books.push(temp_loan)
+            }
+          },
+          (error) => {
+          }
+        );
       }
     );
+    
   }
   edit(transaction: string, indice: number){
     if(transaction != 'new'){

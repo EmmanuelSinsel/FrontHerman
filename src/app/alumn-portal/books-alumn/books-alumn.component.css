@@ -128,7 +128,7 @@ th, td {
     color:#000000
 }
 .row:hover{
-    background-color: #344f92;
+    background-color:#3C4F45;
     color: white;
     cursor:pointer;
 }
@@ -156,7 +156,7 @@ table {border: none;}
     outline-width: 0px;
 }
 .searchbar-container{
-    width: 40%;
+    width: 25%;
     margin-left: 15px;
     display: flex;
     flex-direction: row;

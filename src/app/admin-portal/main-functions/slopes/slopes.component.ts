@@ -1,6 +1,5 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
-import { loan } from 'src/models/models';
 import { CrudService } from 'src/services/crud.service';
 
 export class loan_list{
@@ -26,12 +25,11 @@ export class loan_register{
 }
 
 @Component({
-  selector: 'app-loans',
-  templateUrl: './loans.component.html',
-  styleUrls: ['./loans.component.css']
+  selector: 'app-slopes',
+  templateUrl: './slopes.component.html',
+  styleUrls: ['./slopes.component.css']
 })
-
-export class LoansComponent {
+export class SlopesComponent {
   btn_message: string = "REGISTRAR PRESTAMO"
   loans: loan_list[] = []
   view: boolean = true
@@ -105,7 +103,9 @@ export class LoansComponent {
                 temp_loan.date_return = res[i]['date_return']
               }
               temp_loan.date_transaction = res[i]['date_transaction']
-              this.loans.push(temp_loan)
+              if(temp_loan.date_return =="NO DEVUELTO"){
+                this.loans.push(temp_loan)
+              }
             }
           },
           (error) => {
@@ -114,7 +114,6 @@ export class LoansComponent {
       }
     );
   }
-
   edit(transaction: string, indice: number){
     if(transaction != 'new'){
       this.modify = true 
@@ -134,99 +133,6 @@ export class LoansComponent {
 
   }
 
-  register_loan(){
-    let data = new loan_register
-    data.account = this.account_number
-    data.isbn = this.book
-    data.date_transaction = this.date_loan
-    data.date_deadline = this.date_deadline
-    data.notation = this.notation
-    const token = localStorage.getItem("token_admin")
-    if(token != null){
-      data.token = token
-    }
-    this.crud.register_loan(data).subscribe(
-      (res: any) => {
-        // this.crud.update_book_status(this.id_book,"0").subscribe(
-        //   (res: any) => {
-
-        //   },
-        //   (error) => {
-        //   }
-        // );
-        if(res['status']=="200"){
-          window.alert("Prestamo Registrado")
-          this.clear_form()
-        }
-        if(res['status']=="400"){
-          window.alert("Token inexistente")
-        }
-        if(res['status']=="401"){
-          window.alert("Alumno no registrado")
-        }
-        if(res['status']=="402"){
-          window.alert("Libro no registrado")
-        }
-        if(res['status']=="403"){
-          window.alert("Libro no disponible")
-        }
-
-      },
-      (error) => {
-      }
-    );
-  }
-  update_loan(){
-    let data = new loan_register
-    data.account = this.account_number
-    data.isbn = this.book
-    data.date_transaction = this.date_loan
-    data.date_deadline = this.date_deadline
-    data.notation = this.notation
-    const token = localStorage.getItem("token_admin")
-    if(token != null){
-      data.token = token
-    }
-    this.crud.update_loan(data,this.actual_loan).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Prestamo Actualizado")
-        }
-        if(res['status']=="400"){
-          window.alert("Token inexistente")
-        }
-        if(res['status']=="401"){
-          window.alert("Alumno no registrado")
-        }
-        if(res['status']=="402"){
-          window.alert("Libro no registrado")
-        }
-        if(res['status']=="403"){
-          window.alert("Libro no disponible")
-        }
-        this.clear_form()
-      },
-      (error) => {
-      }
-    );
-  }
-  return_loan(){
-    this.crud.return_book(this.actual_loan).subscribe(
-      (res: any) => {
-        this.crud.update_book_status(this.id_book,String(this.stock+1)).subscribe(
-          (res: any) => {
-            window.alert("Libro devuelto")
-            this.clear_form()
-          },
-          (error) => {
-          }
-        );
-      },
-      (error) => {
-      }
-    );
-  }
 
   get_alumn_data(){
     this.crud.get_alumn("account_number = '"+this.account_number+"'").subscribe(
@@ -281,14 +187,7 @@ export class LoansComponent {
       }
     );
   }
-  change_deadline(){
-    let current_date = new Date(this.date_loan);
-    current_date.setDate(current_date.getDate() + 30);
-    var datePipe = new DatePipe("en-US");
-    let deadline = datePipe.transform(current_date, 'yyyy-MM-dd');
-    if(deadline != null)
-      this.date_deadline = deadline
-  }
+
   clear_form(){
     this.name = "-"
     this.account = "-"
@@ -316,4 +215,15 @@ export class LoansComponent {
     this.modify=false
     this.get_data(this.filter_search)
   }
+
+  send_mail(){
+    this.crud.send_return_mail(this.email, this.title).subscribe(
+      (res: any) => {
+        window.alert("CORREO")
+      },
+      (error) => {
+      }
+    );
+  }
 }
+

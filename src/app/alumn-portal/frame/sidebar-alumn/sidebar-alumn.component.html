@@ -1,14 +1,14 @@
 <div class="side-container">
     <br>
-    <div [ngClass]="index==11 ? button_focus : button_not_focus" (click)="route(11)">
-        <p [ngClass]="index==11 ? label_focus : label_not_focus">Inicio</p>
-    </div>
-    <hr>
     <div [ngClass]="index==1 ? button_focus : button_not_focus" (click)="route(1)">
-        <p [ngClass]="index==1 ? label_focus : label_not_focus">Libros</p>
+        <p [ngClass]="index==1 ? label_focus : label_not_focus">Inicio</p>
     </div>
     <hr>
-    <div [ngClass]="index==8 ? button_focus : button_not_focus" (click)="route(8)">
-        <p [ngClass]="index==8 ? label_focus : label_not_focus">Prestamos</p>
+    <div [ngClass]="index==2 ? button_focus : button_not_focus" (click)="route(2)">
+        <p [ngClass]="index==2 ? label_focus : label_not_focus">Libros</p>
+    </div>
+    <hr>
+    <div [ngClass]="index==3 ? button_focus : button_not_focus" (click)="route(3)">
+        <p [ngClass]="index==3 ? label_focus : label_not_focus">Mis Prestamos</p>
     </div>
 </div>

@@ -62,9 +62,6 @@
             </div>
         </div>
         <br>
-        <div class="btn-container">
-            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO PRESTAMO</button>
-        </div>
     </div>
     <div class="container" style="flex-direction: column; width: 80%; border: 0px;">
         <div *ngIf="register" class="form" style="flex-direction: row; width: 100%;">
@@ -73,27 +70,27 @@
                 <label style="font-weight: bold;">Datos del Prestamo</label><br><br>
                 <label>Alumno</label>
                 <div class="input-container">
-                    <input class="crud-input" placeholder="Numero de cuenta" [(ngModel)]="account_number" (input)="get_alumn_data()">
+                    <input class="crud-input" disabled placeholder="Numero de cuenta" [(ngModel)]="account_number">
                 </div>
                 <br>
                 <label>Libro</label>
                 <div class="input-container">
-                    <input class="crud-input" placeholder="ISBN o Titulo" [(ngModel)]="book" (input)="get_book_data()">
+                    <input class="crud-input" disabled placeholder="ISBN o Titulo" [(ngModel)]="book" >
                 </div>
                 <br>
                 <label>Fecha de Prestamo</label>
                 <div class="input-container">
-                    <input type="date" class="crud-input" (change)="change_deadline()" [(ngModel)]="date_loan">
+                    <input type="date" disabled class="crud-input" [(ngModel)]="date_loan">
                 </div>
                 <br>
                 <label>Fecha de Limite de Devolucion</label>
                 <div class="input-container">
-                    <input type="date" class="crud-input" disabled="true" [(ngModel)]="date_deadline">
+                    <input type="date" disabled class="crud-input" disabled="true" [(ngModel)]="date_deadline">
                 </div>
                 <br>
                 <label>Comentario</label>
                 <div class="input-container">
-                    <input class="crud-input" placeholder="Comentarios sobre el Alumno o el Libro" [(ngModel)]="notation">
+                    <input class="crud-input" disabled placeholder="Comentarios sobre el Alumno o el Libro" [(ngModel)]="notation">
                 </div>
                 <br><br>
             </div>
@@ -136,10 +133,7 @@
         </div>
         <div class="btn-container" *ngIf="register">
             <div style="display: flex; flex-direction: row; width: 50%;">
-                <button class="btn" *ngIf="!modify" (click)="register_loan()" style="background-color: #3C4F45;">REGISTRAR PRESTAMO</button>
-                <button class="btn" *ngIf="!modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
-                <button class="btn" *ngIf="modify" (click)="update_loan()" style="background-color:chocolate;">MODIFICAR PRESTAMO</button>
-                <button class="btn" *ngIf="modify" (click)="return_loan()" style="background-color: #344f92;">LIBRO DEVUELTO</button>
+                <button class="btn" *ngIf="modify" (click)="send_mail()" style="background-color:chocolate;">ENVIAR CORREO DE RECORDATORIO</button>
                 <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
             </div>
         </div>

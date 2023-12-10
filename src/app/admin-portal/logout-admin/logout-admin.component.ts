@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 import { CrudService } from 'src/services/crud.service';
 import { SidebarComponent } from '../frame/sidebar/sidebar.component';
-
+import {Location} from '@angular/common';
 export class admin_data{
   id_admin: string = ""
   user: string = ""
@@ -36,7 +36,7 @@ export class LogoutAdminComponent {
   //RESUME
 
   constructor(private crud: CrudService,
-    private router: Router,){}
+    private router: Router,private location: Location){}
 
   ngOnInit() {
     this.get_data()
@@ -74,7 +74,7 @@ export class LogoutAdminComponent {
       (res: any) => {
         console.log(res)
         if(res['status']=="200"){
-          window.alert("Administrador Actualizado")
+          window.alert("Cuenta Actualizada")
         }
       },
       (error) => {
@@ -83,9 +83,11 @@ export class LogoutAdminComponent {
   }
 
   logout(){
-    localStorage.clear();
+    localStorage.removeItem("token_admin")
     this.router.navigate(['admin/login']);
   }
-
+  return(){
+    this.location.go("admin");
+  }
 }
 

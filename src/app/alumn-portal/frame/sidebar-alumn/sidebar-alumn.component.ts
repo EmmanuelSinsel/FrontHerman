@@ -21,15 +21,15 @@ export class SidebarAlumnComponent {
     this.index = index
     switch(index){
       case 1: {
-        this.location.go("alumn/loans");
+        this.location.go("alumn/home");
         break;
       }
       case 2: {
-        this.location.go('alumn/returns');
+        this.location.go('alumn/books');
         break;
       }
       case 3: {
-        this.location.go('alumn/reserves');
+        this.location.go('alumn/loans');
         break;
       }
     }

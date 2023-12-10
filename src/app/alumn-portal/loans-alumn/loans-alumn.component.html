@@ -1,0 +1,56 @@
+<div class="container">
+    <br><br>
+    <div *ngIf="view">
+        <div class="centerbar">
+        </div><br>
+        <table>
+            <tr>
+                <th style="width: 20px;">
+                    ID
+                </th>
+                <th style="width: 80px;">
+                    ISBN
+                </th>
+                <th style="width: 80px; overflow: hidden;">
+                    LIBRO
+                </th>
+                <th style="width: 80px;">
+                    FECHA DE PRESTAMO
+                </th>
+                <th style="width: 80px;">
+                    FECHA LIMITE
+                </th>
+                <th style="width: 100px;">
+                    FECHA DE REGRESO
+                </th>
+            </tr>
+        </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of loans;let indice=index" class="row">
+                        <td style="width: 20px;">
+                            {{item.id_transaction}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.isbn}}
+                        </td>
+                        <td style="width: 80px; overflow: hidden;">
+                            {{item.book}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.date_transaction}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.date_deadline}}
+                        </td>
+                        <td style="width: 100px;">
+                            {{item.date_return}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

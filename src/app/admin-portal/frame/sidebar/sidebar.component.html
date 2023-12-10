@@ -3,9 +3,12 @@
     <div [ngClass]="index==11 ? button_focus : button_not_focus" (click)="route(11)">
         <p [ngClass]="index==11 ? label_focus : label_not_focus">Dashboard</p>
     </div>
-    <hr>
+    <hr class="hrow">
     <div [ngClass]="index==1 ? button_focus : button_not_focus" (click)="route(1)">
         <p [ngClass]="index==1 ? label_focus : label_not_focus">Prestamos</p>
+    </div>
+    <div [ngClass]="index==2 ? button_focus : button_not_focus" (click)="route(2)">
+        <p [ngClass]="index==2 ? label_focus : label_not_focus">Pendientes</p>
     </div>
     <div [ngClass]="index==3 ? button_focus : button_not_focus" (click)="route(3)">
         <p [ngClass]="index==3 ? label_focus : label_not_focus">Apartados</p>
@@ -19,18 +22,22 @@
     <div [ngClass]="index==6 ? button_focus : button_not_focus" (click)="route(6)">
         <p [ngClass]="index==6 ? label_focus : label_not_focus">Categorias</p>
     </div>
-    <hr>
+    <hr class="hrow">
     <div [ngClass]="index==8 ? button_focus : button_not_focus" (click)="route(8)">
         <p [ngClass]="index==8 ? label_focus : label_not_focus">Observaciones</p>
     </div>
     <div [ngClass]="index==9 ? button_focus : button_not_focus" (click)="route(9)">
         <p [ngClass]="index==9 ? label_focus : label_not_focus">Alumnos</p>
     </div>
-    <hr>
+    <hr class="hrow">
     <div [ngClass]="index==10 ? button_focus : button_not_focus" (click)="route(10)">
         <p [ngClass]="index==10 ? label_focus : label_not_focus">Registro de Acciones</p>
     </div>
-    <div [ngClass]="index==12 ? button_focus : button_not_focus" (click)="route(12)">
+    <hr class="hrow">
+    <div *ngIf="master=='1'" [ngClass]="index==12 ? button_focus : button_not_focus" (click)="route(12)">
         <p [ngClass]="index==12 ? label_focus : label_not_focus">Administradores</p>
+    </div>
+    <div *ngIf="master=='1'" [ngClass]="index==13 ? button_focus : button_not_focus" (click)="route(13)">
+        <p [ngClass]="index==13 ? label_focus : label_not_focus">Bibliotecas</p>
     </div>
 </div>

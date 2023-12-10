@@ -1,6 +1,7 @@
 import { Component, Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {Location} from '@angular/common';
+import { CrudService } from 'src/services/crud.service';
 
 @Injectable({ providedIn: 'root' })
 @Component({
@@ -11,12 +12,24 @@ import {Location} from '@angular/common';
 
 export class SidebarComponent {
   constructor(private router: Router,
-              private location: Location){}
+              private location: Location,
+              private crud: CrudService){}
   public index: Number = 0;
   button_focus = "side-button-selected"
   button_not_focus = "side-button"
   label_focus = "side-button-label-selected"
   label_not_focus = "side-button-label"
+  master: string = ""
+  ngOnInit(){
+    this.crud.get_admin_profile().subscribe(
+      (res: any) => {
+        console.log(res)
+        this.master= res['profile']["master"]
+        console.log(this.master)
+      }
+    );
+  }
+
   route(index: number){
     console.log(index)
     this.index = index
@@ -26,7 +39,7 @@ export class SidebarComponent {
         break;
       }
       case 2: {
-        this.location.go('admin/returns');
+        this.location.go('admin/slopes');
         break;
       }
       case 3: {
@@ -67,6 +80,10 @@ export class SidebarComponent {
       }
       case 12: {
         this.location.go('admin/admin-accounts');
+        break;
+      }
+      case 13: {
+        this.location.go('admin/libraries');
         break;
       }
     }

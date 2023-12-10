@@ -1,8 +1,12 @@
-<app-topbar-alumn></app-topbar-alumn>
+<app-topbar-alumn (click)="index_change()"></app-topbar-alumn>
 <div class="playground">
     <app-sidebar-alumn (click)="index_change()" class="sidebar"></app-sidebar-alumn>
     <br><br>
     <div class="main-container">
+        <app-account *ngIf="index == -1"></app-account>
+        <app-home *ngIf="index == 1"></app-home>
+        <app-books-alumn *ngIf="index == 2"></app-books-alumn>
+        <app-loans-alumn *ngIf="index == 3"></app-loans-alumn>
     </div>
     <div class="sidebar"></div>
 </div>

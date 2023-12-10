@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { author_register } from 'src/app/admin-portal/main-functions/authors/authors.component';
-import { book_filter, book_register } from 'src/app/admin-portal/main-functions/books/books.component';
+import { book_filter_admin, book_register } from 'src/app/admin-portal/main-functions/books/books.component';
 import { category_register } from 'src/app/admin-portal/main-functions/generes/generes.component';
 import { loan_register } from 'src/app/admin-portal/main-functions/loans/loans.component';
 import { AppModule } from 'src/app/app.module';
@@ -123,12 +123,13 @@ export class CrudService {
     }
     return this.http.post<any>(this.url+"/get_book_data/",data, {headers: this.getCustomHeaders()});
   }
-  get_books(filter: book_filter){
+  get_books(filter: book_filter_admin){
     let params = {
       title: filter.title,
       isbn:filter.isbn,
       category:filter.category,
       author:filter.author,
+      library:filter.library_id
     }
     return this.http.post<any>(this.url+"/get_full_book/",params, {headers: this.getCustomHeaders()});
   }
@@ -251,6 +252,25 @@ export class CrudService {
     return this.http.put<any>(this.url+"/update_reserve/id_reserve = '"+where+"'", data, {headers: this.getCustomHeaders()});
   }
 
+  send_return_mail(email: string, title: string){
+    const data = {
+      email: email,
+      title: title
+    }
+    return this.http.post<any>(this.url+"/send_return_mail/",data, {headers: this.getCustomHeaders()});
+  }
+
+  register_alumn_reserve(alumn: string, book: string, date: string, id: string){
+    const data = {
+      id_alumn: String(alumn),
+      id_book: String(book),
+      date_pickup: date,
+      id_library: String(id),
+      state: "1"
+    }
+    console.log(data)
+    return this.http.post<any>(this.url+"/insert_reserve/",data, {headers: this.getCustomHeaders()});
+  }
   //OBSERVACIONES
   get_advice(where: string){
     if(where==""){
@@ -290,6 +310,20 @@ export class CrudService {
     return this.http.delete<any>(this.url+"/delete_advice/id_author = '"+where+"'", {headers: this.getCustomHeaders()});
   }
   //ALUMNOS
+  get_token_data(){
+    let token = localStorage.getItem("token_alumn")
+    let params = {
+      token: token
+    }
+    return this.http.post<any>(this.url+"/get_token_data/",params, {headers: this.getCustomHeaders()});
+  }
+  get_alumn_profile(){
+    let token = localStorage.getItem("token_alumn")
+    let params = {
+      token: token
+    }
+    return this.http.post<any>(this.url+"/get_alumn_profile/",params,{headers: this.getCustomHeaders()});    
+  }
   get_alumns(where: string){
     if(where==""){
       where="*"
@@ -371,8 +405,7 @@ export class CrudService {
     let params = {
       token: token
     }
-    return this.http.post<any>(this.url+"/get_admin_profile/",params,{headers: this.getCustomHeaders()});
-
+    return this.http.post<any>(this.url+"/get_admin_profile/",params,{headers: this.getCustomHeaders()});    
   }
   get_admins(where: string){
     if(where==""){

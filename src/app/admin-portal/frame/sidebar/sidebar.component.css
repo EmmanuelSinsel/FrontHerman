@@ -1,8 +1,9 @@
 .side-container{
-    margin-left: 20px;
     width: 100%;
     background-color: #ffffff;
-    height: 95%;
+    height: 100%;
+    border-right: 1px black solid;
+    overflow: hidden;
 }
 .side-button{
     width: 100%;
@@ -25,14 +26,14 @@
     cursor:pointer;
 }
 .side-button-label{
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 10px;
     font-size: 18px;
     font-weight:500;
     color: black;
 }
 .side-button-label-selected{
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 10px;
     font-size: 18px;
     font-weight:500;
@@ -54,4 +55,8 @@
     position: relative;
     top:10px;
     float:left;
+}
+.hrow{
+    margin-right: 10px;
+    margin-left: 10px;
 }

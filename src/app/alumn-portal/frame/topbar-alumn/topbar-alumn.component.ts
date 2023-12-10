@@ -12,9 +12,9 @@ export class TopbarAlumnComponent {
     private location: Location){}
 
   profile(){
-    this.location.go('admin/profile');
+    this.location.go('alumn/profile');
   }
   dashboard(){
-    this.location.go('admin');
+    this.location.go('alumn/home');
   }
 }

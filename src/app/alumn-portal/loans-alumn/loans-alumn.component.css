@@ -1,6 +1,6 @@
 .background-body{
     position: absolute;
-    background: #344f92;
+    background:#3C4F45;
     background-position: center;
     background-size:100%;
     background-repeat: no-repeat;
@@ -62,7 +62,7 @@
     font-style: italic;
 }
 .url_text:hover{
-    color: #344f92;
+    color:#3C4F45;
     cursor:pointer;
 }
 .left-text{
@@ -128,7 +128,7 @@ th, td {
     color:#000000
 }
 .row:hover{
-    background-color: #344f92;
+    background-color:#3C4F45;
     color: white;
     cursor:pointer;
 }
@@ -156,8 +156,7 @@ table {border: none;}
     outline-width: 0px;
 }
 .searchbar-container{
-    width: 40%;
-    margin-left: 15px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -170,14 +169,14 @@ table {border: none;}
     outline-width: 0px;
 }
 .centerbar{
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 .search{
-    margin-left: 15px;
+    margin-right: 5px;
     width: 30px;
     height: 30px;
     justify-content: center;

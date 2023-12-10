@@ -38,7 +38,7 @@ export class AlumnComponent {
     }
     else{
       this.index=11
-      this.router.navigate(['alumn/dashboard']);
+      this.router.navigate(['alumn/login']);
     }
   }
   
@@ -47,11 +47,17 @@ export class AlumnComponent {
   index_change(){
     let path = this.location.path();
     console.log(path)
-    if (path == "/admin/loans") {
+    if (path == "/alumn/profile") {
+      this.index = -1
+    }
+    if (path == "/alumn/home") {
       this.index = 1
     }
-    if (path == "/admin/returns") {
+    if (path == "/alumn/books") {
       this.index = 2
+    }
+    if (path == "/alumn/loans") {
+      this.index = 3
     }
   }
 }

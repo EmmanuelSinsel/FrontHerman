@@ -1,0 +1,113 @@
+<div class="container">
+    <br><br>
+    <div *ngIf="view" style="width: 50%;">
+        <div class="centerbar">
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Titulo" [(ngModel)]="filter_title">
+            </div>
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="ISBN" [(ngModel)]="filter_isbn">
+            </div>
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Categoria" [(ngModel)]="filter_category">
+            </div>
+            <div class="searchbar-container">
+                <input class="searchbar" placeholder="Autor" [(ngModel)]="filter_author">
+            </div>
+            <div class="search" (click)="get_data(true)"></div>
+        </div><br>
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 20px;">
+                    ID
+                </th>
+                <th style="width: 80px;">
+                    TITULO
+                </th>
+                <th style="width: 80px;">
+                    ISBN
+                </th>
+                <th style="width: 80px; overflow: hidden;">
+                    CATEGORIA
+                </th>
+                <th style="width: 80px;">
+                    AUTOR
+                </th>
+                <th style="width: 80px;">
+                    STOCK
+                </th>
+            </tr>
+        </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of books;let indice=index" (click)="edit(item.id_book, indice)" class="row">
+                        <td style="width: 20px;">
+                            {{item.id_book}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.title}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.isbn}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.category}}
+                        </td>
+                        <td style="width: 80px; overflow: hidden;">
+                            {{item.author}}
+                        </td>
+                        <td style="width: 80px;">
+                            {{item.stock}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div *ngIf="register" class="form">
+            <div style="margin-left: 10px; width: 100%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos del Prestamo</label><br><br>
+                <label>Titulo</label>
+                <div class="input-container">
+                    <input class="crud-input" disabled placeholder="Titulo" [(ngModel)]="title">
+                </div>
+                <br>
+                <label>ISBN</label>
+                <div class="input-container">
+                    <input class="crud-input" disabled placeholder="ISBN" [(ngModel)]="isbn">
+                </div>
+                <br>
+                <label>Categoria</label>
+                <div class="input-container">
+                    <input class="crud-input" disabled placeholder="Categoria" [(ngModel)]="category">
+                </div>
+                <br>
+                <label>Autor</label>
+                <div class="input-container">
+                    <input class="crud-input" disabled placeholder="Autor" [(ngModel)]="author">
+                </div>
+                <br>
+                <label>Stock</label>
+                <div class="input-container">
+                    <input type="number" class="crud-input" disabled placeholder="Stock" [(ngModel)]="stock">
+                </div>
+                <br>
+                <label>Fecha de Prestamo</label>
+                <div class="input-container">
+                    <input type="date" class="crud-input"  [(ngModel)]="date_loan">
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="btn-container" *ngIf="register">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" *ngIf="modify" (click)="reserve_book()" style="background-color:chocolate;">APARTAR LIBRO</button>
+                <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>

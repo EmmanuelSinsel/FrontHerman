@@ -20,6 +20,7 @@
     align-items: center;
     transition: height 1s ease;
     overflow-y: auto;
+    background-color: white;
 }
 
 .auth-form{

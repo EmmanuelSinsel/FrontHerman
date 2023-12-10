@@ -9,6 +9,7 @@ import { AlumnComponent } from './alumn-portal/alumn/alumn.component';
 
 const routes: Routes = [{ path: 'admin/login',             component: LoginAdminComponent },
                         { path: 'admin',                   component: AdminComponent },
+                        { path: 'admin/slopes',            component: AdminComponent },
                         { path: 'admin/alumn',             component: AdminComponent },
                         { path: 'admin/authors',           component: AdminComponent },
                         { path: 'admin/books',             component: AdminComponent },
@@ -23,8 +24,14 @@ const routes: Routes = [{ path: 'admin/login',             component: LoginAdmin
                         { path: 'admin/alumn-accounts',    component: AdminComponent },
                         { path: 'admin/statistics',        component: AdminComponent },
                         { path: 'admin/logs',              component: AdminComponent },
+                        { path: 'admin/profile',           component: AdminComponent },
+                        { path: 'admin/libraries',         component: AdminComponent },
                         { path: 'alumn/login',             component: LoginAlumnComponent },
                         { path: 'alumn',                   component: AlumnComponent },
+                        { path: 'alumn/home',              component: AlumnComponent },
+                        { path: 'alumn/books',             component: AlumnComponent },
+                        { path: 'alumn/loans',             component: AlumnComponent },
+                        { path: 'alumn/profile',           component: AlumnComponent },
 
 ];
 

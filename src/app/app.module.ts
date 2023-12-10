@@ -31,6 +31,12 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { LogoutAdminComponent } from './admin-portal/logout-admin/logout-admin.component';
 import { TopbarAlumnComponent } from './alumn-portal/frame/topbar-alumn/topbar-alumn.component';
 import { SidebarAlumnComponent } from './alumn-portal/frame/sidebar-alumn/sidebar-alumn.component';
+import { SlopesComponent } from './admin-portal/main-functions/slopes/slopes.component';
+import { HomeComponent } from './alumn-portal/home/home.component';
+import { LoansAlumnComponent } from './alumn-portal/loans-alumn/loans-alumn.component';
+import { BooksAlumnComponent } from './alumn-portal/books-alumn/books-alumn.component';
+import { AccountComponent } from './alumn-portal/account/account.component';
+import { LibrariesComponent } from './admin-portal/admin-functions/libraries/libraries.component';
 
 
 @NgModule({
@@ -55,7 +61,13 @@ import { SidebarAlumnComponent } from './alumn-portal/frame/sidebar-alumn/sideba
     StatisticsComponent,
     LogoutAdminComponent,
     TopbarAlumnComponent,
-    SidebarAlumnComponent
+    SidebarAlumnComponent,
+    SlopesComponent,
+    HomeComponent,
+    LoansAlumnComponent,
+    BooksAlumnComponent,
+    AccountComponent,
+    LibrariesComponent
   ],
   imports: [
     BrowserModule,
