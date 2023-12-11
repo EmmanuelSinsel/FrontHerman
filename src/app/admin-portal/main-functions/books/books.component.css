@@ -192,7 +192,7 @@ table {border: none;}
     position:relative;
 }
 #table-scroll {
-    height:600px;
+    height: 400%;
     overflow:auto;  
 }
 #table-wrapper table {

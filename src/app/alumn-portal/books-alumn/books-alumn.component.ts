@@ -138,7 +138,6 @@ export class BooksAlumnComponent {
               }else{
                 window.alert(res['message'])
               }
-  
             },
             (error) => {
             }

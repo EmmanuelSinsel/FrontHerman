@@ -89,6 +89,7 @@ export class LoansComponent {
         this.crud.get_loan(where).subscribe(
           (res: any) => {
             this.loans = []
+            console.log(res)
             for(let i = 0; i <= Object.keys(res).length-1; i++){
               let temp_loan: loan_list = new loan_list
               temp_loan.account = res[i]['account_number']
@@ -96,6 +97,7 @@ export class LoansComponent {
               temp_loan.book = res[i]['book']
               temp_loan.id_transaction = res[i]['id_transaction']
               temp_loan.date_deadline = res[i]['date_deadline']
+              temp_loan.notation = res[i]['notation']
               if(res[i]['date_return'] == null){
                 temp_loan.date_return = "NO DEVUELTO"
               }else{
@@ -143,13 +145,6 @@ export class LoansComponent {
     if(this.crud.verify(data)==1){
       this.crud.register_loan(data).subscribe(
         (res: any) => {
-          // this.crud.update_book_status(this.id_book,"0").subscribe(
-          //   (res: any) => {
-
-          //   },
-          //   (error) => {
-          //   }
-          // );
           if(res['status']=="200"){
             window.alert("Prestamo Registrado")
             this.clear_form()
@@ -165,6 +160,8 @@ export class LoansComponent {
           }
           if(res['status']=="403"){
             window.alert("Libro no disponible")
+          }else{
+            window.alert(res['message'])
           }
 
         },

@@ -188,3 +188,13 @@ table {border: none;}
     background-repeat: no-repeat;
     cursor:pointer;
 }
+#table-wrapper {
+    position:relative;
+}
+#table-scroll {
+    height:400px;
+    overflow:auto;  
+}
+#table-wrapper table {
+    width:100%;
+}
