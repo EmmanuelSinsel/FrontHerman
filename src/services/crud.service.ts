@@ -14,6 +14,7 @@ import { register_list } from 'src/app/admin-portal/admin-functions/historial/hi
 import { alumn_register } from 'src/app/admin-portal/admin-functions/alumn-accounts/alumn-accounts.component';
 import { AuthService } from './auth.service';
 import { admin_register } from 'src/app/admin-portal/admin-functions/admin-accounts/admin-accounts.component';
+import { lib_register } from 'src/app/admin-portal/admin-functions/libraries/libraries.component';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,17 @@ export class CrudService {
       return headers
     }
   }
+
+  public verify(params: any){
+    for (let [key, value] of Object.entries(params)) {
+      if(value == "" && key != "notation"){
+        window.alert("DATOS FALTANTES")
+        return 0;
+      }
+    }
+    return 1;
+  }
+
 
   get_fields(data: fields){
     const params = {
@@ -91,9 +103,6 @@ export class CrudService {
     this.auth.log(data.token,"Prestamo actualizado el dia: "+this.now)
     return this.http.post<any>(this.url+"/update_loan/", params, {headers: this.getCustomHeaders()});
   }
-  delete_loan(){
-    
-  }
 
   return_book(where: string){
     const data = {
@@ -131,6 +140,7 @@ export class CrudService {
       author:filter.author,
       library:filter.library_id
     }
+    console.log(params)
     return this.http.post<any>(this.url+"/get_full_book/",params, {headers: this.getCustomHeaders()});
   }
   register_book(book: book_register){
@@ -466,5 +476,42 @@ export class CrudService {
   get_statistics(){
     return this.http.get<any>(this.url+"/get_full_statistics/",{headers: this.getCustomHeaders()});
   }
-
+  //BIBLIOTECAS
+  register_lib(admin: lib_register){
+    let params = {
+      name: admin.name,
+      address: admin.address,
+      phone: admin.phone,
+      email: admin.email,
+      token: admin.token,
+      state:"1"
+    }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Biblioteca registrada el dia: "+this.now)
+    return this.http.post<any>(this.url+"/insert_library/",params, {headers: this.getCustomHeaders()});
+  }
+  update_lib(admin: lib_register, where: string){
+    let params = {
+      name: admin.name,
+      address: admin.address,
+      phone: admin.phone,
+      email: admin.email,
+      token: admin.token,
+      state:"1"
+    }
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Biblioteca actualizada el dia: "+this.now)
+    return this.http.put<any>(this.url+"/update_library/id_library = '"+where+"'",params, {headers: this.getCustomHeaders()});
+  }
+  delete_lib(where: string){
+    let token = localStorage.getItem("token_admin")
+    if(token != null)this.auth.log(token,"Biblioteca eliminada el dia: "+this.now)
+    return this.http.delete<any>(this.url+"/delete_library/id_library = '"+where+"'", {headers: this.getCustomHeaders()});
+  }
+  get_libs(where: string){
+    if(where==""){
+      where="*"
+    }
+    return this.http.get<any>(this.url+"/list_library/"+where,{headers: this.getCustomHeaders()});
+  }
 }

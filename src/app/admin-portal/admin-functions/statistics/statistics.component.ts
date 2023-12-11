@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CanvasJSChart } from '@canvasjs/angular-charts';
 import { CrudService } from 'src/services/crud.service';
-
+import {Title} from "@angular/platform-browser";
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -10,16 +10,16 @@ import { CrudService } from 'src/services/crud.service';
 export class StatisticsComponent {
   datas:any[] = [];
 
-  constructor(private crud: CrudService,){}
+  constructor(private crud: CrudService){}
   
   chartOptions = {
 	}	
   donutChartOptions = {
-	  
 	}	
 
   ngOnInit(){
     this.get_data()
+
   }
 
   get_data(){
@@ -67,6 +67,7 @@ export class StatisticsComponent {
         let temp = {
           animationEnabled: true,
           theme: "light2",
+          backgroundColor: "#FAFAFA",
           title: {
             text: "Prestamos en el año",
             fontFamily: "Palatino",
@@ -99,6 +100,7 @@ export class StatisticsComponent {
         this.chartOptions = temp
         let tempdonut = {
           animationEnabled: true,
+          backgroundColor: "#FAFAFA",
           title:{
           text: "Total de libros por categoria",
           fontFamily: "Palatino",

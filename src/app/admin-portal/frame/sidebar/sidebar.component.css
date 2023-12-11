@@ -1,13 +1,10 @@
 .side-container{
+    margin-left: 20px;
     width: 100%;
-    background-color: #ffffff;
-    height: 100%;
-    border-right: 1px black solid;
-    overflow: hidden;
+    height: 95%;
 }
 .side-button{
     width: 100%;
-    background-color:#ffffff;
     height: 50px;
     text-align: center;
     display: flex;
@@ -26,14 +23,14 @@
     cursor:pointer;
 }
 .side-button-label{
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 10px;
     font-size: 18px;
     font-weight:500;
     color: black;
 }
 .side-button-label-selected{
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 10px;
     font-size: 18px;
     font-weight:500;
@@ -55,8 +52,4 @@
     position: relative;
     top:10px;
     float:left;
-}
-.hrow{
-    margin-right: 10px;
-    margin-left: 10px;
 }

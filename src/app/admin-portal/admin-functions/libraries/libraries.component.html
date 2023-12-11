@@ -1,1 +1,89 @@
-<p>libraries works!</p>
+<div class="container">
+    <br><br>
+    <div *ngIf="view" style="width: 60%;">
+        <br>
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 20px;">
+                    ID
+                </th>
+                <th style="width: 100px;">
+                    NOMBRE
+                </th>
+                <th style="width: 100px;">
+                    DIRECCION
+                </th>
+                <th style="width: 100px;">
+                    TELEFONO
+                </th>
+                <th style="width: 400px;">
+                    EMAIL
+                </th>
+            </tr>
+        </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table style="overflow: hidden;">
+                    <tr *ngFor="let item of libs;let indice=index" (click)="edit(item.id_lib, indice)" class="row">
+                        <td style="width: 20px;">
+                            {{item.id_lib}}
+                        </td>
+                        <td style="width: 100px;">
+                            {{item.name}}
+                        </td>
+                        <td style="width: 100px;">
+                            {{item.address}}
+                        </td>
+                        <td style="width: 100px;">
+                            {{item.phone}}
+                        </td>
+                        <td style="width: 400px;">
+                            {{item.email}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="btn-container">
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO LIBRO</button>
+        </div>
+    </div>
+    <div class="container" style="flex-direction: column; width: 80%;">
+        <div *ngIf="register" class="form">
+            <div style="margin-left: 10px; width: 100%;">
+                <br><br>
+                <label style="font-weight: bold;">Datos de la Biblioteca</label><br><br>
+                <label>Nombre</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Nombre" [(ngModel)]="name">
+                </div>
+                <br>
+                <label>Direccion</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Direccion" [(ngModel)]="address">
+                </div>
+                <br>
+                <label>Telefono</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Telefono" [(ngModel)]="phone">
+                </div>
+                <br>
+                <label>Email</label>
+                <div class="input-container">
+                    <input class="crud-input" placeholder="Email" [(ngModel)]="email">
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="btn-container" *ngIf="register">
+            <div style="display: flex; flex-direction: row; width: 50%;">
+                <button class="btn" *ngIf="!modify" (click)="register_lib()" style="background-color: #3C4F45;">REGISTRAR BIBLIOTECA</button>
+                <button class="btn" *ngIf="!modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+                <button class="btn" *ngIf="modify" (click)="delete_lib()" style="background-color:rgb(255, 82, 82);">ELIMINAR BIBLIOTECA</button>
+                <button class="btn" *ngIf="modify" (click)="update_lib()" style="background-color:chocolate;">MODIFICAR BIBLIOTECA</button>
+                <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>

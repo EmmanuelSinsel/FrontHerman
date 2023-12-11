@@ -144,9 +144,17 @@ export class LoginAdminComponent {
       this.prError = "Las contraseñas no coinciden"
     }
   }
-  
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) { 
-    console.log(event.target.innerHeight)
+  bLogin(){
+    this.showPR1=false
+    this.showLogin=true
   }
+  bPR1(){
+    this.showPR2=false
+    this.showPR1=true
+  }
+  bPR2(){
+    this.showPR3=false
+    this.showPR2=true
+  }
+
 }

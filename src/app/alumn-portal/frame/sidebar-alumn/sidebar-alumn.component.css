@@ -1,12 +1,10 @@
 .side-container{
     margin-left: 20px;
     width: 100%;
-    background-color: #ffffff;
     height: 95%;
 }
 .side-button{
     width: 100%;
-    background-color:#ffffff;
     height: 50px;
     text-align: center;
     display: flex;

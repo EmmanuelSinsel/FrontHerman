@@ -76,19 +76,21 @@ export class GeneresComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.register_category(data).subscribe(
-      (res: any) => {
-        if(res['status']=="200"){
-          window.alert("Categoria Registrada")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.register_category(data).subscribe(
+        (res: any) => {
+          if(res['status']=="200"){
+            window.alert("Categoria Registrada")
+            this.clear_form()
+          }
+          if(res['status']=="400"){
+            window.alert("Categoria ya registrada")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="400"){
-          window.alert("Categoria ya registrada")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   update_category(){
     let data = new category_register
@@ -97,20 +99,22 @@ export class GeneresComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.update_category(data,this.actual_category).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Categoria Actualizada")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.update_category(data,this.actual_category).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Categoria Actualizada")
+            this.clear_form()
+          }
+          if(res['status']=="402"){
+            window.alert("Categoria ya registrada")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="402"){
-          window.alert("Categoria ya registrada")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
 
   delete_category(){

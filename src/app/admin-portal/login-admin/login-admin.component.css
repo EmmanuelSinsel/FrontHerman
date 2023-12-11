@@ -106,3 +106,11 @@
     font-size: 30px;
     font-family: Palatino;
 }
+
+.return{
+    height: 30px;
+    width: auto;
+    align-self:baseline;
+    margin-left: 10px;
+    margin-top: 10px;
+}

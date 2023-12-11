@@ -225,4 +225,21 @@ export class LoginAlumnComponent {
       }
     );
   }
+
+  bLogin(){
+    this.showPR1=false
+    this.showLogin=true
+  }
+  bPR1(){
+    this.showPR2=false
+    this.showPR1=true
+  }
+  bLoginReg(){
+    this.r1=false
+    this.showLogin=true
+  }
+  bReg(){
+    this.r2=false
+    this.r1=true
+  }
 }

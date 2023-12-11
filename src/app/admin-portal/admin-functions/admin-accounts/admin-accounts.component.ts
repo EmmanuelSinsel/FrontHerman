@@ -111,19 +111,21 @@ export class AdminAccountsComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.register_admin(data).subscribe(
-      (res: any) => {
-        if(res['status']=="200"){
-          window.alert("Administrador Registrado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.register_admin(data).subscribe(
+        (res: any) => {
+          if(res['status']=="200"){
+            window.alert("Administrador Registrado")
+            this.clear_form()
+          }
+          if(res['status']=="400"){
+            window.alert("Administrador ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="400"){
-          window.alert("Administrador ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   update_admin(){
     let data = new admin_register
@@ -138,20 +140,22 @@ export class AdminAccountsComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.update_admin(data,this.actual_admin).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Administrador Actualizado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.update_admin(data,this.actual_admin).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Administrador Actualizado")
+            this.clear_form()
+          }
+          if(res['status']=="402"){
+            window.alert("Administrador ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="402"){
-          window.alert("Administrador ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
 
   delete_admin(){

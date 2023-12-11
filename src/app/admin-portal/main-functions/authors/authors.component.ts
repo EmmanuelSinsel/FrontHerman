@@ -75,19 +75,21 @@ export class AuthorsComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.register_author(data).subscribe(
-      (res: any) => {
-        if(res['status']=="200"){
-          window.alert("Autor Registrado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.register_author(data).subscribe(
+        (res: any) => {
+          if(res['status']=="200"){
+            window.alert("Autor Registrado")
+            this.clear_form()
+          }
+          if(res['status']=="400"){
+            window.alert("Autor ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="400"){
-          window.alert("Autor ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   update_author(){
     let data = new author_register
@@ -96,20 +98,22 @@ export class AuthorsComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.update_author(data,this.actual_author).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Autor Actualizado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.update_author(data,this.actual_author).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Autor Actualizado")
+            this.clear_form()
+          }
+          if(res['status']=="402"){
+            window.alert("Autor ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="402"){
-          window.alert("Autor ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
 
   delete_author(){

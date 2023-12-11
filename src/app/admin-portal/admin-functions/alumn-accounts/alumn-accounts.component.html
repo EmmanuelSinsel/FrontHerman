@@ -63,14 +63,14 @@
         </div>
         <br>
         <div class="btn-container">
-            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVO AUTOR</button>
+            <button class="btn" *ngIf="!modify" (click)="edit('new', -1)" style="background-color: #3C4F45;">NUEVA CUENTA</button>
         </div>
     </div>
     <div class="container" style="flex-direction: column; width: 80%;">
         <div *ngIf="register" class="form">
             <div style="margin-left: 10px; width: 100%;">
                 <br><br>
-                <label style="font-weight: bold;">Datos del Prestamo</label><br><br>
+                <label style="font-weight: bold;">Datos del Alumno</label><br><br>
                 <label>Nombre</label>
                 <div class="input-container">
                     <input class="crud-input" placeholder="Numero de Cuenta" [(ngModel)]="account_number">
@@ -117,10 +117,10 @@
         </div>
         <div class="btn-container" *ngIf="register">
             <div style="display: flex; flex-direction: row; width: 50%;">
-                <button class="btn" *ngIf="!modify" (click)="register_alumn()" style="background-color: #3C4F45;">REGISTRAR AUTOR</button>
+                <button class="btn" *ngIf="!modify" (click)="register_alumn()" style="background-color: #3C4F45;">REGISTRAR ALUMNO</button>
                 <button class="btn" *ngIf="!modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
-                <button class="btn" *ngIf="modify" (click)="delete_alumn()" style="background-color:rgb(255, 82, 82);">ELIMINAR AUTOR</button>
-                <button class="btn" *ngIf="modify" (click)="update_alumn()" style="background-color:chocolate;">MODIFICAR AUTOR</button>
+                <button class="btn" *ngIf="modify" (click)="delete_alumn()" style="background-color:rgb(255, 82, 82);">ELIMINAR ALUMNO</button>
+                <button class="btn" *ngIf="modify" (click)="update_alumn()" style="background-color:chocolate;">MODIFICAR ALUMNO</button>
                 <button class="btn" *ngIf="modify" (click)="clear_form()" style="background-color: rgb(255, 82, 82);">CANCELAR</button>
             </div>
         </div>

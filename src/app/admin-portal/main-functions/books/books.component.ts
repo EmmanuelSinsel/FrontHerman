@@ -73,9 +73,8 @@ export class BooksComponent {
     if(filters.library_id == ""){filters.library_id="*"}
     this.crud.get_admin_profile().subscribe(
       (res: any) => {
-        console.log(res)
-        if(res['profile']['master'] != "1"){
-          filters.library_id = res['profile']['id_library']
+        if(res['profile']['master'] == null){
+          filters.library_id = String(res['profile']['library_id'])
         }
         this.crud.get_books(filters).subscribe(
           (res: any) => {
@@ -127,19 +126,21 @@ export class BooksComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.register_book(data).subscribe(
-      (res: any) => {
-        if(res['status']=="200"){
-          window.alert("Libro Registrado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.register_book(data).subscribe(
+        (res: any) => {
+          if(res['status']=="200"){
+            window.alert("Libro Registrado")
+            this.clear_form()
+          }
+          if(res['status']=="400"){
+            window.alert("Libro ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="400"){
-          window.alert("Libro ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   update_book(){
     let data = new book_register
@@ -152,20 +153,22 @@ export class BooksComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.update_book(data,this.actual_book).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Libro Actualizado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.update_book(data,this.actual_book).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Libro Actualizado")
+            this.clear_form()
+          }
+          if(res['status']=="402"){
+            window.alert("Libro ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="402"){
-          window.alert("Libro ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
 
   delete_book(){

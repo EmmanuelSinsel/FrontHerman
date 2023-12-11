@@ -1,6 +1,6 @@
 <div class="back" >
     <div class="background-body"></div>
-    <div class="container" (window:resize)="onResize($event)">
+    <div class="container">
         <div class="auth-form">
             <div class="col" *ngIf="showLogin">
                 <br><br>
@@ -24,6 +24,7 @@
                 <br>
             </div>
             <div class="col" *ngIf="showPR1">
+                <img src="return.png" class="return" (click)="bLogin()">
                 <br><br>
                 <p class="auth-label">Recuperar Contraseña</p>
                 <br>
@@ -38,6 +39,7 @@
                 <br><br>
             </div>
             <div class="col" *ngIf="showPR2">
+                <img src="return.png" class="return" (click)="bPR1()">
                 <br><br>
                 <p class="auth-label">Recuperar Contraseña</p>
                 <br>

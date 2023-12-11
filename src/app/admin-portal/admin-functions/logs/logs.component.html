@@ -7,30 +7,36 @@
                 <div class="search" (click)="get_data(filter_search)"></div>
             </div>
         </div><br>
-        <table class="item-table">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th style="width: 100px;">
-                    USUARIO
-                </th>
-                <th style="width: 400px;">
-                    REGISTRO
-                </th>
-            </tr>
-            <tr *ngFor="let item of logs;let indice=index" class="row">
-                <td>
-                    {{item.id_log}}
-                </td>
-                <td>
-                    {{item.user}}
-                </td>
-                <td>
-                    {{item.log}}
-                </td>
-            </tr>
-        </table>
+            <table class="item-table">
+                <tr>
+                    <th style="width: 50px;">
+                        ID
+                    </th>
+                    <th style="width: 100px;">
+                        USUARIO
+                    </th>
+                    <th style="width: 400px;">
+                        REGISTRO
+                    </th>
+                </tr>
+            </table>
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <tr *ngFor="let item of logs;let indice=index" class="row">
+                        <td style="width: 50px;">
+                            {{item.id_log}}
+                        </td>
+                        <td style="width: 100px;">
+                            {{item.user}}
+                        </td>
+                        <td style="width: 400px;">
+                            {{item.log}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <br>
     </div>
 </div>

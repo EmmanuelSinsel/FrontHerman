@@ -131,19 +131,21 @@ export class AlumnAccountsComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.register_alumn(data).subscribe(
-      (res: any) => {
-        if(res['status']=="200"){
-          window.alert("Autor Registrado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.register_alumn(data).subscribe(
+        (res: any) => {
+          if(res['status']=="200"){
+            window.alert("Autor Registrado")
+            this.clear_form()
+          }
+          if(res['status']=="400"){
+            window.alert("Autor ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="400"){
-          window.alert("Autor ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   update_alumn(){
     let data = new alumn_register
@@ -162,20 +164,22 @@ export class AlumnAccountsComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.update_alumn(data,this.actual_alumn).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Autor Actualizado")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.update_alumn(data,this.actual_alumn).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Autor Actualizado")
+            this.clear_form()
+          }
+          if(res['status']=="402"){
+            window.alert("Autor ya registrado")
+          }
+        },
+        (error) => {
         }
-        if(res['status']=="402"){
-          window.alert("Autor ya registrado")
-        }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
 
   delete_alumn(){

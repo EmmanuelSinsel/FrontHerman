@@ -47,11 +47,14 @@ export class BooksAlumnComponent {
   stock: string = ""
   date_loan: string = ""
   //RESUME
-
-
+  flag: boolean = true
+  date: string = ""
   constructor(private crud: CrudService,){}
   ngOnInit() {
     this.get_data(false)
+    let date = formatDate(new Date(), 'yyyy-MM-dd', 'en')
+    let current_date = new Date(this.date);
+    this.date_loan = date
   }
   async get_data(filter: boolean){
     let filters: book_filter_admin = new book_filter_admin
@@ -63,24 +66,35 @@ export class BooksAlumnComponent {
     if(filters.isbn == ""){filters.isbn="*"}
     if(filters.category == ""){filters.category="*"}
     if(filters.author == ""){filters.author="*"}
-    this.crud.get_books(filters).subscribe(
+    if(filters.library_id = ""){filters.library_id = "*"}
+    this.crud.get_alumn_profile().subscribe(
       (res: any) => {
         console.log(res)
-        this.books = []
-        for(let i = 0; i <= Object.keys(res).length-1; i++){
-          let temp_loan: book_list = new book_list
-          temp_loan.id_book = res[i]['id_book']
-          temp_loan.title = res[i]['title']
-          temp_loan.isbn = res[i]['isbn']
-          temp_loan.category = res[i]['category']
-          temp_loan.author = res[i]['author']
-          temp_loan.stock = res[i]['stock']
-          this.books.push(temp_loan)
-        }
+        let library = res['profile']['library_id']
+        filters.library_id = String(library)
+        this.crud.get_books(filters).subscribe(
+          (res: any) => {
+            console.log(res)
+            this.books = []
+            for(let i = 0; i <= Object.keys(res).length-1; i++){
+              let temp_loan: book_list = new book_list
+              temp_loan.id_book = res[i]['id_book']
+              temp_loan.title = res[i]['title']
+              temp_loan.isbn = res[i]['isbn']
+              temp_loan.category = res[i]['category']
+              temp_loan.author = res[i]['author']
+              temp_loan.stock = res[i]['stock']
+              this.books.push(temp_loan)
+            }
+          },
+          (error) => {
+          }
+        );
       },
       (error) => {
       }
     );
+    
   }
   edit(transaction: string, indice: number){
     if(transaction != 'new'){
@@ -92,35 +106,51 @@ export class BooksAlumnComponent {
       this.category = book.category
       this.author = book.author
       this.stock = book.stock
+      console.log(this.stock)
+      if(Number(this.stock) < 2){
+        this.flag=false
+      }else{
+        this.flag=true
+      }
     }
-    this.register = true
-    this.view = false
-    console.log(transaction)
+    if(this.flag==false){
+      window.alert("LIBRO NO DISPONIBLE")
+    }else{
+      this.register = true
+      this.view = false
+      console.log(transaction)
+    }
+
 
   }
 
   reserve_book(){
-    this.crud.get_token_data().subscribe(
-      (res: any) => {
-        console.log(res)
-        this.crud.register_alumn_reserve(res['id'],this.actual_book,this.date_loan,res['library']).subscribe(
-          (res: any) => {
-            console.log(res)
-            if(res['status']=="200"){
-              window.alert("LIBRO APARTADO")
-              this.clear_form()
-            }else{
-              window.alert(res['message'])
+    if(this.date_loan!="mm/dd/yyyy"){
+      this.crud.get_token_data().subscribe(
+        (res: any) => {
+          console.log(res)
+          this.crud.register_alumn_reserve(res['id'],this.actual_book,this.date_loan,res['library']).subscribe(
+            (res: any) => {
+              console.log(res)
+              if(res['status']=="200"){
+                window.alert("LIBRO APARTADO")
+                this.clear_form()
+              }else{
+                window.alert(res['message'])
+              }
+  
+            },
+            (error) => {
             }
+          );
+        },
+        (error) => {
+        }
+      );
+    }else{
+      window.alert("FECHA INVALIDA")
+    }
 
-          },
-          (error) => {
-          }
-        );
-      },
-      (error) => {
-      }
-    );
   }
 
   clear_form(){

@@ -80,32 +80,36 @@ export class AdvicesComponent {
     let data = new advice_register
     data.account_number = this.account_number
     data.advice = this.advice
-    this.crud.register_advice(data).subscribe(
-      (res: any) => {
-        if(res['status']=="200"){
-          window.alert("Observacion Registrada")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.register_advice(data).subscribe(
+        (res: any) => {
+          if(res['status']=="200"){
+            window.alert("Observacion Registrada")
+            this.clear_form()
+          }
+        },
+        (error) => {
         }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   update_advice(){
     let data = new advice_register
     data.account_number = this.account_number
     data.advice = this.advice
-    this.crud.update_advice(data,this.actual_advice).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Observacion Actualizada")
-          this.clear_form()
+    if(this.crud.verify(data)==1){
+      this.crud.update_advice(data,this.actual_advice).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Observacion Actualizada")
+            this.clear_form()
+          }
+        },
+        (error) => {
         }
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
 
   delete_advice(){

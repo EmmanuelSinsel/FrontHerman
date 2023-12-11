@@ -75,7 +75,6 @@ export class LoansComponent {
     this.get_data("")
   }
   async get_data(where: string){
-
     this.crud.get_admin_profile().subscribe(
       (res: any) => {
         console.log(res)
@@ -135,7 +134,7 @@ export class LoansComponent {
   }
 
   register_loan(){
-    let data = new loan_register
+    let data = new loan_register();
     data.account = this.account_number
     data.isbn = this.book
     data.date_transaction = this.date_loan
@@ -145,36 +144,38 @@ export class LoansComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.register_loan(data).subscribe(
-      (res: any) => {
-        // this.crud.update_book_status(this.id_book,"0").subscribe(
-        //   (res: any) => {
+    if(this.crud.verify(data)==1){
+      this.crud.register_loan(data).subscribe(
+        (res: any) => {
+          // this.crud.update_book_status(this.id_book,"0").subscribe(
+          //   (res: any) => {
 
-        //   },
-        //   (error) => {
-        //   }
-        // );
-        if(res['status']=="200"){
-          window.alert("Prestamo Registrado")
-          this.clear_form()
-        }
-        if(res['status']=="400"){
-          window.alert("Token inexistente")
-        }
-        if(res['status']=="401"){
-          window.alert("Alumno no registrado")
-        }
-        if(res['status']=="402"){
-          window.alert("Libro no registrado")
-        }
-        if(res['status']=="403"){
-          window.alert("Libro no disponible")
-        }
+          //   },
+          //   (error) => {
+          //   }
+          // );
+          if(res['status']=="200"){
+            window.alert("Prestamo Registrado")
+            this.clear_form()
+          }
+          if(res['status']=="400"){
+            window.alert("Token inexistente")
+          }
+          if(res['status']=="401"){
+            window.alert("Alumno no registrado")
+          }
+          if(res['status']=="402"){
+            window.alert("Libro no registrado")
+          }
+          if(res['status']=="403"){
+            window.alert("Libro no disponible")
+          }
 
-      },
-      (error) => {
-      }
-    );
+        },
+        (error) => {
+        }
+      );
+    }
   }
   update_loan(){
     let data = new loan_register
@@ -187,29 +188,31 @@ export class LoansComponent {
     if(token != null){
       data.token = token
     }
-    this.crud.update_loan(data,this.actual_loan).subscribe(
-      (res: any) => {
-        console.log(res)
-        if(res['status']=="200"){
-          window.alert("Prestamo Actualizado")
+    if(this.crud.verify(data)==1){
+      this.crud.update_loan(data,this.actual_loan).subscribe(
+        (res: any) => {
+          console.log(res)
+          if(res['status']=="200"){
+            window.alert("Prestamo Actualizado")
+          }
+          if(res['status']=="400"){
+            window.alert("Token inexistente")
+          }
+          if(res['status']=="401"){
+            window.alert("Alumno no registrado")
+          }
+          if(res['status']=="402"){
+            window.alert("Libro no registrado")
+          }
+          if(res['status']=="403"){
+            window.alert("Libro no disponible")
+          }
+          this.clear_form()
+        },
+        (error) => {
         }
-        if(res['status']=="400"){
-          window.alert("Token inexistente")
-        }
-        if(res['status']=="401"){
-          window.alert("Alumno no registrado")
-        }
-        if(res['status']=="402"){
-          window.alert("Libro no registrado")
-        }
-        if(res['status']=="403"){
-          window.alert("Libro no disponible")
-        }
-        this.clear_form()
-      },
-      (error) => {
-      }
-    );
+      );
+    }
   }
   return_loan(){
     this.crud.return_book(this.actual_loan).subscribe(
