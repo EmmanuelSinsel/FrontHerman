@@ -48,6 +48,7 @@ export class LoansComponent {
   date: string | null = ""
   //RESUME
   //-ALUMN
+  id: string  = ""
   name: string = "-"
   account: string = "-"
   group: string = "-"
@@ -149,16 +150,16 @@ export class LoansComponent {
             window.alert("Prestamo Registrado")
             this.clear_form()
           }
-          if(res['status']=="400"){
+          else if(res['status']=="400"){
             window.alert("Token inexistente")
           }
-          if(res['status']=="401"){
+          else if(res['status']=="401"){
             window.alert("Alumno no registrado")
           }
-          if(res['status']=="402"){
+          else if(res['status']=="402"){
             window.alert("Libro no registrado")
           }
-          if(res['status']=="403"){
+          else if(res['status']=="403"){
             window.alert("Libro no disponible")
           }else{
             window.alert(res['message'])
@@ -213,7 +214,16 @@ export class LoansComponent {
         this.crud.update_book_status(this.id_book,String(this.stock+1)).subscribe(
           (res: any) => {
             window.alert("Libro devuelto")
-            this.clear_form()
+            this.crud.set_timeout(this.date_deadline,this.id).subscribe(
+              (res: any) => {
+                if(res['status']="1"){
+                  window.alert("PENALIZACION POR ENTREGA TARDIA: 7 DIAS")
+                }
+                this.clear_form()
+              },
+              (error) => {
+              }
+            );
           },
           (error) => {
           }
@@ -227,7 +237,9 @@ export class LoansComponent {
   get_alumn_data(){
     this.crud.get_alumn("account_number = '"+this.account_number+"'").subscribe(
       (res: any) => {
+        console.log(res)
         if(res[0]!= null){
+          this.id = res[0]['id_alumn']
           this.name=res[0]["first_name"]+" "+res[0]["last_name"]
           this.account = this.account_number
           this.group = res[0]['school_group']

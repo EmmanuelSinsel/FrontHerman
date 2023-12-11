@@ -65,6 +65,13 @@ export class CrudService {
         return this.http.get<any>(this.url+"/list_admin/id_admin = '"+user+"'", {headers: this.getCustomHeaders()})
   }
   //PRESTAMOS
+  set_timeout(date: string, alumn: string){
+    const data = {
+      date: date,
+      alumn: alumn
+    }
+    return this.http.post<any>(this.url+"/check_timeout",data, {headers: this.getCustomHeaders()});
+  }
   get_loan(where: string){
     if(where==""){
       where="*"
