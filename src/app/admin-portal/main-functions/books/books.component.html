@@ -73,7 +73,7 @@
         <div *ngIf="register" class="form">
             <div style="margin-left: 10px; width: 100%;">
                 <br><br>
-                <label style="font-weight: bold;">Datos del Prestamo</label><br><br>
+                <label style="font-weight: bold;">Datos del Libro</label><br><br>
                 <label>Titulo</label>
                 <div class="input-container">
                     <input class="crud-input" placeholder="Titulo" [(ngModel)]="title">
@@ -86,12 +86,22 @@
                 <br>
                 <label>Categoria</label>
                 <div class="input-container">
-                    <input class="crud-input" placeholder="Categoria" [(ngModel)]="category">
+                    <select class="crud-input" (change)="category_change($event)" [(ngModel)]="category_search">
+                        <option value="" disabled selected>Categoria</option>
+                        <option *ngFor="let item of categories" [value]="item.category">
+                            <label>{{item.category}}</label>
+                        </option>
+                    </select>
                 </div>
                 <br>
                 <label>Autor</label>
                 <div class="input-container">
-                    <input class="crud-input" placeholder="Autor" [(ngModel)]="author">
+                    <select class="crud-input" (change)="author_change($event)" [(ngModel)]="author_search">
+                        <option value="" disabled selected>Autor</option>
+                        <option *ngFor="let item of authors" [value]="item.name">
+                            <label>{{item.name}}</label>
+                        </option>
+                    </select>
                 </div>
                 <br>
                 <label>Stock</label>

@@ -77,7 +77,6 @@ export class LoansComponent {
   async get_data(where: string){
     this.crud.get_admin_profile().subscribe(
       (res: any) => {
-        console.log(res)
         if(res['profile']['master'] != "1"){
           if(where==""){
             where = "book.id_library = '"+res['profile']['library_id']+"'"
@@ -89,7 +88,6 @@ export class LoansComponent {
         }
         this.crud.get_loan(where).subscribe(
           (res: any) => {
-            console.log(res)
             this.loans = []
             for(let i = 0; i <= Object.keys(res).length-1; i++){
               let temp_loan: loan_list = new loan_list
@@ -129,8 +127,6 @@ export class LoansComponent {
     }
     this.register = true
     this.view = false
-    console.log(transaction)
-
   }
 
   register_loan(){
@@ -264,10 +260,9 @@ export class LoansComponent {
           this.category = res[0]['category']
           this.author = res[0]['author']
           this.id_book = res[0]['id_book']
-          console.log(res[0]['status'])
           this.stock = Number(res[0]['status'])
-          if(res[0]['status'] > 0){
-            this.state = "Disponible"
+          if(res[0]['status'] > 1){
+            this.state = res[0]['status']
           }else{
             this.state = "No Disponible"
           }

@@ -1,6 +1,8 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
+import { author_list } from '../authors/authors.component';
+import { category_list } from '../generes/generes.component';
 
 export class book_list{
   id_book: string = ""
@@ -37,6 +39,8 @@ export class book_register{
 export class BooksComponent {
 
   btn_message: string = "REGISTRAR PRESTAMO"
+  authors: author_list[] = []
+  categories: category_list[] = []
   books: book_list[] = []
   view: boolean = true
   register: boolean = false
@@ -54,11 +58,14 @@ export class BooksComponent {
   author: string = ""
   stock: string = ""
   //RESUME
-
+  author_search: string = ""
+  category_search: string = ""
 
   constructor(private crud: CrudService,){}
   ngOnInit() {
     this.get_data(false)
+    this.get_category("")
+    this.get_authors("")
   }
   async get_data(filter: boolean){
     let filters: book_filter_admin = new book_filter_admin
@@ -186,8 +193,57 @@ export class BooksComponent {
     );
   }
 
-  clear_form(){
+  get_authors(where: string){
+    if(where == ""){
+      where = " state = 1"
+    }else{
+      where ="name LIKE '"+ where+"%' AND state = 1"
+    }
+    this.crud.get_authors(where).subscribe(
+      (res: any) => {
+        console.log(res)
+        this.authors = []
+        for(let i = 0; i <= Object.keys(res).length-1; i++){
+          let temp_author: author_list = new author_list
+          temp_author.id_author = res[i]['id_author']
+          temp_author.name = res[i]['name']
+          this.authors.push(temp_author)
+        }
+      },
+      (error) => {
+      }
+    );
+  }
+  get_category(where: string){
+    if(where == ""){
+      where = " state = 1"
+    }else{
+      where ="category LIKE '"+ where+"%' AND state = 1"
+    }
+    this.crud.get_category(where).subscribe(
+      (res: any) => {
+        console.log(res)
+        this.categories = []
+        for(let i = 0; i <= Object.keys(res).length-1; i++){
+          let temp_category: category_list = new category_list
+          temp_category.id_category = res[i]['id_category']
+          temp_category.category = res[i]['category']
+          this.categories.push(temp_category)
+        }
+      },
+      (error) => {
+      }
+    );
+  }
 
+  category_change(event: any){
+    if(event.target != null){this.category = event.target.value}
+  }
+  author_change(event: any){
+    if(event.target != null){this.author = event.target.value}
+  }
+
+  clear_form(){
     this.title = ""
     this.isbn = ""
     this.category = ""
